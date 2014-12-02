@@ -27,4 +27,4 @@ A Lightweight Responsive jQuery Tooltip Plugin
 | [Bojan Petkovski](http://object505.com) |
 
 ## License
-bTabs is licensed under the [MIT License](http://object505.mit-license.org/)
+tipso is licensed under the [MIT License](http://object505.mit-license.org/)
