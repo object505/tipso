@@ -20,3 +20,11 @@ A Lightweight Responsive jQuery Tooltip Plugin
 | useTitle   | false        | To use the default title attribute as content (true,false)                            |
 | onShow     | function(){} | Function to be executed after tipso is shown                                          |
 | onHide     | function(){} | Function to be executed after tipso is hidden                                         |
+
+## Author
+| ![twitter/BojanPetkovski](http://gravatar.com/avatar/30befed2bed6e1690a6b47cf617f7927?s=105](http://twitter.com/BojanPetkovski "Follow @BojanPetkovski on Twitter") |
+|---|
+| [Bojan Petkovski](http://object505.com) |
+
+## License
+bTabs is licensed under the [MIT License](http://object505.mit-license.org/)
