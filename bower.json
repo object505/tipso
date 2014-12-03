@@ -2,6 +2,9 @@
   "name": "tipso",
   "description": "A Lightweight Responsive jQuery Tooltip Plugin",
   "version": "1.0.0",
+  "authors": [
+        "Bojan Petkovski"
+    ],
   "keywords": [
   		"tipso",
         "jquery",
