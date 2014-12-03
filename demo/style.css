@@ -122,7 +122,17 @@ input[type=text]{
 }
 .demo-section h4{
 	margin: 0px 0px 30px;
-} 
+}
+.author{
+	font-size: 12px;
+	text-align: center;
+	font-weight: 700;
+}
+.author a{
+	color: #55b555;
+	font-weight: 700;
+}
+
 
 /**
  * Media query for 960 Screens - sets nested grids to 100%
