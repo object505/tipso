@@ -19,7 +19,7 @@
             offsetX     : 0,
             offsetY     : 0,
             content     : null,
-            useTitle    : false,
+            useTitle    : true,
             onShow      : null,
             onHide      : null
 	};
