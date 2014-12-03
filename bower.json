@@ -4,5 +4,8 @@
   "main": ["src/tipso.min.js", "src/tipso.css"],
   "dependencies": {
     "jquery": ">=1.7"
-  }
+  },
+  "ignore": [
+    "demo"
+  ]
 }
