@@ -3,6 +3,23 @@ tipso
 
 A Lightweight Responsive jQuery Tooltip Plugin
 
+## Getting started
+
+1. Include jQuery
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+>Requires jQuery 1.7+
+
+2. Include plugin's code
+
+	<link rel="stylesheet" href="/path/to/tipso.css">
+	<script src="/path/to/tipso.js"></script>
+
+3. Call the plugin
+
+	$('.tipso').tipso();
+
 
 ##Usage
 
@@ -17,9 +34,47 @@ A Lightweight Responsive jQuery Tooltip Plugin
 | offsetX    | 0            | Offset value of the tooltip on X axis                                                 |
 | offsetY    | 0            | Offset value of the tooltip on Y axis                                                 |
 | content    | null         | The content of the tooltip, can be text, html or whatever you want                    |
-| useTitle   | false        | To use the default title attribute as content (true,false)                            |
+| useTitle   | true         | To use the default title attribute as content (true,false)                            |
 | onShow     | function(){} | Function to be executed after tipso is shown                                          |
 | onHide     | function(){} | Function to be executed after tipso is hidden                                         |
+
+> Additionaly you can use `data-tipso` instead of the title attribute for the tooltip content
+
+## API
+
+	// Show the tipso tooltip
+	$('.tipso').tipso('show');
+
+	// Hide the tipso tooltip
+	$('.tipso').tipso('hide');
+
+	// Destroy tipso tooltip
+	$('.tipso').tipso('destroy');
+
+	// Add a callback when tipso is shown
+	$('.tipso').tipso({
+		onShow: function(){
+			// Your code
+		}
+	});
+
+	// Add a callback when tipso is hidden
+	$('.tipso').tipso({
+		onHide: function(){
+			// Your code
+		}
+	});
+
+	// Update tipso options
+	$('.tipso').tipso('update', 'content', 'new content');
+
+## Demo
+Here is the link to the [demo][demo]
+[demo]: http://tipso.object505.com
+
+## Bugs
+For bug reports, questions, feature requests, or other suggestions please create an [issue][issue] on GitHub.
+[issue]: https://github.com/object505/tipso/issues/new
 
 ## Author
 | ![twitter/BojanPetkovski](http://gravatar.com/avatar/30befed2bed6e1690a6b47cf617f7927?s=105](http://twitter.com/BojanPetkovski "Follow @BojanPetkovski on Twitter") |

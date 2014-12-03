@@ -1,5 +1,5 @@
 /*!
- * tipso - A Lightweight Responsive jQuery Tooltip Plugin v0.1.0
+ * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.0
  * Copyright (c) 2014 Bojan Petkovski
  * http://tipso.object505.com
  * Licensed under the MIT license
