@@ -6,20 +6,20 @@ A Lightweight Responsive jQuery Tooltip Plugin
 ## Getting started
 
 1. Include jQuery
-
+	```html
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+	```
 >Requires jQuery 1.7+
 
 2. Include plugin's code
-
+	```html
 	<link rel="stylesheet" href="/path/to/tipso.css">
 	<script src="/path/to/tipso.js"></script>
-
+	```
 3. Call the plugin
-
+	```javascript
 	$('.tipso').tipso();
-
+	```
 
 ##Usage
 
