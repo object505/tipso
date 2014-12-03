@@ -73,7 +73,7 @@ A Lightweight Responsive jQuery Tooltip Plugin
 
 	// Update tipso options
 	$('.tipso').tipso('update', 'content', 'new content');
-	```
+```
 
 ## Demo
 Here is the link to the [demo][demo]
