@@ -3,6 +3,8 @@ tipso
 
 A Lightweight Responsive jQuery Tooltip Plugin
 
+[![Bower version](http://img.shields.io/bower/v/tipso.svg?style=flat)](http://bower.io/search/?q=tipso)
+
 ## Getting started
 
 1. Include jQuery
