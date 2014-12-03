@@ -19,27 +19,36 @@
 			// Position Tipso
 			jQuery('.right').tipso({
 				position: 'right',
-				background: 'rgba(0,0,0,0.8)'
+				background: 'rgba(0,0,0,0.8)',
+				useTitle: false,
 			});
 			jQuery('.left').tipso({
-				position: 'left'
+				position: 'left',
+				background: 'tomato',
+				useTitle: false,
 			});
 			jQuery('.bottom').tipso({
-				position: 'bottom'
+				position: 'bottom',
+				background: '#2574A9',
+				useTitle: false,
 			});
 			jQuery('.top, .destroy, .update, .update-tipso-content').tipso({
-				position: 'top'
+				position: 'top',
+				background: '#F62459',
+				useTitle: false,
 			});
 			// Use Title For Tipso Content
-			jQuery('.title-tipso').tipso({
-				useTitle : true
-			});
+			jQuery('.title-tipso').tipso();
 			// Tipso for Image
 			jQuery('.img-tipso').tipso({
-				useTitle : true,
+				useTitle: false,
 				background: 'rgba(0,0,0,0.8)'
 			});
 			// Show - Hide Tipso on Click
+			jQuery('.show-hide').tipso({
+				background: 'tomato',
+				useTitle: false
+			});
 			jQuery('.show-hide-tipso').on('click', function(e){
 				if(jQuery(this).hasClass('clicked')){
 					jQuery(this).removeClass('clicked');
@@ -76,7 +85,10 @@
 				}
 			});
 			jQuery('.page-load').tipso({
-				position: 'left'
+				position: 'left',
+				background: 'rgb(236,236,236)',
+				color: '#663399',
+				useTitle: false
 
 			});
 
@@ -96,8 +108,28 @@
 			</div>
 		</div>
 	</header>
+	<a href="https://github.com/object505/tipso"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 	<div id="main">
 		<div class="grid w960">
+			<div class="row">
+				<div class="c12">
+					<h3>Getting started</h3>				
+
+<p>1. Include jQuery</p>
+<pre><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+<p>Requires jQuery 1.7+</p>
+
+<p>2. Include plugin's code</p>
+<pre><code>&lt;link rel="stylesheet" href="/path/to/tipso.css"&gt;
+&lt;script src="/path/to/tipso.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>3. Call the plugin </p>
+<pre><code>$('.tipso').tipso();</code></pre>
+
+				</div>
+			</div>
 			<div class="row">
 				<div class="c12">
 					<h3>Defaults</h3>
@@ -111,7 +143,7 @@
     offsetX     : 0,
     offsetY     : 0,
     content     : null,
-    useTitle    : false,
+    useTitle    : true,
     onShow      : null,
     onHide      : null
 });</code></pre>
@@ -250,9 +282,7 @@ jQuery('.update-tipso-input').on('click', function(e){
 				<div class="c6">
 					<pre><span>Code Example</span>
 <code>
-jQuery('.title-tipso').tipso({
-  useTitle : true
-});
+jQuery('.title-tipso').tipso();
 </code>
 </pre>
 				</div>
@@ -264,14 +294,14 @@ jQuery('.title-tipso').tipso({
 			<div class="row demo-section">
 				<div class="c6">
 					<h4>Add tipso to image</h4>
-					<img src="http://placehold.it/555x255/55b555/ffffff&text=tipso+rocks!" class="img-tipso" title="I am an image tipso">
+					<img src="http://placehold.it/555x255/55b555/ffffff&text=tipso+rocks!" class="img-tipso" data-tipso="I am an image tipso">
 				</div>
 
 				<div class="c6">
 					<pre><span>Code Example</span>
 <code>
 jQuery('.img-tipso').tipso({
-  useTitle : true
+  useTitle : false
 });
 </code>
 </pre>
@@ -281,7 +311,7 @@ jQuery('.img-tipso').tipso({
 			<div class="row demo-section">
 				<div class="c6">
 					<h4>Tipso Callback</h4>
-					<p>Lorem ipsum dolor sit amet, <span class="callback-tipso" data-tipso="Tipso Callback" title="Tipso Callback">Callback</span> adipisicing elit. Autem, pariatur obcaecati perspiciatis non, ullam necessitatibus vel omnis vero nesciunt reprehenderit, quas voluptas quidem exercitationem quibusdam rerum suscipit ab illo!</p>
+					<p>Lorem ipsum dolor sit amet, <span class="callback-tipso" title="Tipso Callback">Callback</span> adipisicing elit. Autem, pariatur obcaecati perspiciatis non, ullam necessitatibus vel omnis vero nesciunt reprehenderit, quas voluptas quidem exercitationem quibusdam rerum suscipit ab illo!</p>
 				</div>
 
 				<div class="c6">

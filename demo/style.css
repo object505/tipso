@@ -138,13 +138,13 @@ input[type=text]{
 @media handheld, only screen and (max-width: 768px), only screen and (max-device-width: 768px) and (orientation:portrait){
 body{font-size:90%}
 .c1,.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{width:100%;margin-right:0;margin-left:0;margin-bottom:20px}
-
+	h1 span{display: block;}
 }
 
 /**
  * Media query for phones
  */
 @media handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px){
-	h1 span{display: block; font-size: 20px;}
+	h1 span{font-size: 20px;}
 	#main {padding: 10px 0;}
 }
