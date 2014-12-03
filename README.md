@@ -46,7 +46,7 @@ A Lightweight Responsive jQuery Tooltip Plugin
 > Additionaly you can use `data-tipso` instead of the title attribute for the tooltip content
 
 ## API
-
+	```javascript
 	// Show the tipso tooltip
 	$('.tipso').tipso('show');
 
@@ -72,6 +72,7 @@ A Lightweight Responsive jQuery Tooltip Plugin
 
 	// Update tipso options
 	$('.tipso').tipso('update', 'content', 'new content');
+	```
 
 ## Demo
 Here is the link to the [demo][demo]
