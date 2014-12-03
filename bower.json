@@ -1,0 +1,8 @@
+{
+  "name": "tipso",
+  "version": "1.0.0",
+  "main": ["src/tipso.min.js", "src/tipso.css"],
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}
