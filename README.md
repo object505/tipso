@@ -11,7 +11,7 @@ A Lightweight Responsive jQuery Tooltip Plugin
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	```
 
->Requires jQuery 1.7+
+	>Requires jQuery 1.7+
 
 2. Include plugin's code
 
