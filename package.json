@@ -28,7 +28,7 @@
     "jquery": ">=1.7"
   },
   "bugs": {
-    "web": "https://github.com/object505/tipso/issues/new"
+    "url": "https://github.com/object505/tipso/issues/new"
   },
   "repository": {
     "type": "git",
