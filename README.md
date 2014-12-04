@@ -3,6 +3,8 @@ tipso
 
 A Lightweight Responsive jQuery Tooltip Plugin
 
+[![Build Status](https://travis-ci.org/object505/tipso.svg?branch=master)](https://travis-ci.org/object505/tipso)
+[![NPM version](http://img.shields.io/npm/v/tipso.svg?style=flat)](https://www.npmjs.org/package/tipso)
 [![Bower version](http://img.shields.io/bower/v/tipso.svg?style=flat)](http://bower.io/search/?q=tipso)
 
 ## Getting started
