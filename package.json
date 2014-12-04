@@ -11,10 +11,7 @@
     "lightweight"
   ],
   "version": "1.0.0",
-  "author": {
-    "name": "Bojan Petkovski",
-    "url": "http://object505.com/"
-  },
+  "author": "Bojan Petkovski (http://object505.com/)",
   "licenses": [
     {
       "type": "MIT",
@@ -23,14 +20,18 @@
   ],
   "demos": [
     "http://tipso.object505.com/"
-  ],  
+  ],
   "bugs": {
     "url": "https://github.com/object505/tipso/issues/new"
   },
-  "main": ["src/tipso.min.js", "src/tipso.css"],
+  "main": [
+    "src/tipso.min.js",
+    "src/tipso.css"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/object505/tipso.git"
   },
-  "homepage": "https://github.com/object505/tipso"
+  "homepage": "https://github.com/object505/tipso",
+  "license": "MIT"  
 }
