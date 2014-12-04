@@ -4,12 +4,12 @@
   "description": "A Lightweight Responsive jQuery Tooltip Plugin",
   "main": ["src/tipso.min.js", "src/tipso.css"],
   "keywords": [
-  		"tipso",
-        "jquery",
-        "tooltip",
-        "responsive",
-        "mobile",
-        "lightweight"
+    "tipso",
+    "jquery-plugin",
+    "tooltip",
+    "responsive",
+    "mobile",
+    "lightweight"
     ],
   "authors": [
         "Bojan Petkovski"
