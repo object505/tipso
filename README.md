@@ -7,6 +7,8 @@ A Lightweight Responsive jQuery Tooltip Plugin
 [![NPM version](http://img.shields.io/npm/v/tipso.svg?style=flat)](https://www.npmjs.org/package/tipso)
 [![Bower version](http://img.shields.io/bower/v/tipso.svg?style=flat)](http://bower.io/search/?q=tipso)
 
+>There is also a Wordpress version of this plugin. Get it [here](https://wordpress.org/plugins/tipso/)
+
 ## Getting started
 
 1. Include jQuery
