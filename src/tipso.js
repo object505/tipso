@@ -21,7 +21,7 @@
             content     : null,
 			ajaxContentUrl : null,
             useTitle    : true,
-			beforeShow  : null,
+			onBeforeShow  : null,
             onShow      : null,
             onHide      : null
 	};
@@ -74,8 +74,8 @@
             obj = this, $win = $(window),
             arrow = 10,
             pos_top, pos_left;
-			if ($.isFunction(obj.settings.beforeShow)){
-				obj.settings.beforeShow($(this));
+			if ($.isFunction(obj.settings.onBeforeShow)){
+				obj.settings.onBeforeShow($(this));
 			}
         	tipso_bubble.css({
                 background: obj.settings.background,

@@ -63,8 +63,8 @@
 			jQuery('.beforeShow').tipso({
 				background: 'tomato',
 				useTitle: false,
-				beforeShow : function(){
-					console.log('This is beforeShow');
+				onBeforeShow : function(){
+					console.log('This is onBeforeShow');
 				}
 			});
 			jQuery('.beforeShow-tipso').on('click', function(e){
@@ -244,7 +244,7 @@ jQuery('.show-hide-tipso').on('click', function(e){
 jQuery('.beforeShow').tipso({
 	background: 'tomato',
 	useTitle: false,
-	beforeShow : function(){
+	onBeforeShow : function(){
 		console.log('This is beforeShow');
 	}
 });
