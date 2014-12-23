@@ -19,7 +19,9 @@
             offsetX     : 0,
             offsetY     : 0,
             content     : null,
+			ajaxContentUrl : null,
             useTitle    : true,
+			beforeShow  : null,
             onShow      : null,
             onHide      : null
 	};
@@ -67,12 +69,14 @@
             return this.tipso_bubble;
         },
 		show: function () {
-			var tipso_bubble = this.tooltip(),
+		    var tipso_bubble = this.tooltip(),
             $e = this.element,
             obj = this, $win = $(window),
             arrow = 10,
             pos_top, pos_left;
-
+			if ($.isFunction(obj.settings.beforeShow)){
+				obj.settings.beforeShow($(this));
+			}
         	tipso_bubble.css({
                 background: obj.settings.background,
                 color: obj.settings.color,
@@ -120,8 +124,13 @@
             $e = this.element,
             obj = this,
             title = this._title;
-
-            if(obj.settings.content){
+			if(obj.settings.ajaxContentUrl){
+				content = $.ajax({
+						type: "GET",
+						url: obj.settings.ajaxContentUrl,
+						async: false
+					}).responseText;
+			} else if(obj.settings.content){
                 content = obj.settings.content;
             } else {
                 if(obj.settings.useTitle == true){

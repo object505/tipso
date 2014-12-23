@@ -59,6 +59,30 @@
 				}
 				e.preventDefault();
 			});
+			// Before show
+			jQuery('.beforeShow').tipso({
+				background: 'tomato',
+				useTitle: false,
+				beforeShow : function(){
+					console.log('This is beforeShow');
+				}
+			});
+			jQuery('.beforeShow-tipso').on('click', function(e){
+				if(jQuery(this).hasClass('clicked')){
+					jQuery(this).removeClass('clicked');
+					jQuery('.beforeShow').tipso('hide');
+				} else {
+					jQuery(this).addClass('clicked');
+					jQuery('.beforeShow').tipso('show');
+				}
+				e.preventDefault();
+			});
+			//Ajax
+			jQuery('.ajax').tipso({
+				background: 'tomato',
+				useTitle: false,
+				ajaxContentUrl : 'ajax.html'
+			});
 			// Destroy Tipso
 			jQuery('.destroy-tipso').on('click', function(e){
 				jQuery('.destroy').tipso('destroy');
@@ -206,7 +230,56 @@ jQuery('.show-hide-tipso').on('click', function(e){
 </pre>
 				</div>
 			</div>
+			
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Before show</h4>
+					<p>Some <span class="beforeShow" data-tipso="Some content">content</span></p>
+					<a href="#" class="beforeShow-tipso">Click me to show/hide tipso</a>
+				</div>
 
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+jQuery('.beforeShow').tipso({
+	background: 'tomato',
+	useTitle: false,
+	beforeShow : function(){
+		console.log('This is beforeShow');
+	}
+});
+jQuery('.beforeShow-tipso').on('click', function(e){
+	if(jQuery(this).hasClass('clicked')){
+		jQuery(this).removeClass('clicked');
+		jQuery('.beforeShow').tipso('hide');
+	} else {
+		jQuery(this).addClass('clicked');
+		jQuery('.beforeShow').tipso('show');
+	}
+	e.preventDefault();
+});
+</code>
+					</pre>
+				</div>
+			</div>
+<div class="row demo-section">
+				<div class="c6">
+					<h4>Ajax content</h4>
+					<p>Some <span class="ajax" data-tipso="This is TIPSO!">content</span></p>
+				</div>
+
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+jQuery('.ajax').tipso({
+	background: 'tomato',
+	useTitle: false,
+	ajaxContentUrl : 'ajax.html'
+});
+</code>
+</pre>
+				</div>
+			</div>
 
 
 			<div class="row demo-section">
