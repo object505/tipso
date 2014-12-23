@@ -8,9 +8,9 @@
 
 ;(function ( $, window, document, undefined ) {
 
-	var pluginName = "tipso",
-		defaults = {
-			speed       : 400,
+    var pluginName = "tipso",
+        defaults = {
+            speed       : 400,
             background  : '#55b555',
             color       : '#ffffff',
             position    : 'top',
@@ -19,118 +19,118 @@
             offsetX     : 0,
             offsetY     : 0,
             content     : null,
-			ajaxContentUrl : null,
+            ajaxContentUrl : null,
             useTitle    : true,
-			onBeforeShow  : null,
+            onBeforeShow  : null,
             onShow      : null,
             onHide      : null
-	};
+    };
 
-	function Plugin ( element, options ) {
-			this.element = $(element);
-			this.settings = $.extend({}, defaults, options);
-			this._defaults = defaults;
-			this._name = pluginName;
-			this._title = this.element.attr('title');
-			this.mode = 'hide';
-			this.init();
-	}
+    function Plugin ( element, options ) {
+            this.element = $(element);
+            this.settings = $.extend({}, defaults, options);
+            this._defaults = defaults;
+            this._name = pluginName;
+            this._title = this.element.attr('title');
+            this.mode = 'hide';
+            this.init();
+    }
 
-	$.extend(Plugin.prototype, {
-		init: function () {
-			var obj = this,
-			$e = this.element;
+    $.extend(Plugin.prototype, {
+        init: function () {
+            var obj = this,
+            $e = this.element;
 
-			$e.addClass('tipso_style').removeAttr('title');
+            $e.addClass('tipso_style').removeAttr('title');
 
-			if(isTouchSupported()){
-				$e.on('click' + '.' + pluginName, function(e) {
-					obj.mode == 'hide' ? obj.show() : obj.hide();
-					e.stopPropagation();
-				});
-				$(document).on('click', function(){
-					if(obj.mode == 'show'){
-						obj.hide();
-					}
-				});
-			} else {
-				$e.on('mouseover' + '.' + pluginName, function() {
-					obj.show();
-				});
-				$e.on('mouseout' + '.' + pluginName, function() {
-					obj.hide();
-				});
-			}
-		},
-		tooltip: function () {
+            if(isTouchSupported()){
+                $e.on('click' + '.' + pluginName, function(e) {
+                    obj.mode == 'hide' ? obj.show() : obj.hide();
+                    e.stopPropagation();
+                });
+                $(document).on('click', function(){
+                    if(obj.mode == 'show'){
+                        obj.hide();
+                    }
+                });
+            } else {
+                $e.on('mouseover' + '.' + pluginName, function() {
+                    obj.show();
+                });
+                $e.on('mouseout' + '.' + pluginName, function() {
+                    obj.hide();
+                });
+            }
+        },
+        tooltip: function () {
             if (!this.tipso_bubble) {
                 this.tipso_bubble = $('<div class="tipso_bubble"><div class="tipso_content"></div><div class="tipso_arrow"></div></div>');
             }
             return this.tipso_bubble;
         },
-		show: function () {
-		    var tipso_bubble = this.tooltip(),
+        show: function () {
+            var tipso_bubble = this.tooltip(),
             $e = this.element,
             obj = this, $win = $(window),
             arrow = 10,
             pos_top, pos_left;
-			if ($.isFunction(obj.settings.onBeforeShow)){
-				obj.settings.onBeforeShow($(this));
-			}
-        	tipso_bubble.css({
+            if ($.isFunction(obj.settings.onBeforeShow)){
+                obj.settings.onBeforeShow($(this));
+            }
+            tipso_bubble.css({
                 background: obj.settings.background,
                 color: obj.settings.color,
                 width: obj.settings.width
             }).hide();
-        	tipso_bubble.find('.tipso_content').html(obj.content());
+            tipso_bubble.find('.tipso_content').html(obj.content());
 
-        	reposition(obj);
+            reposition(obj);
 
-        	$win.resize(function(){
-        		reposition(obj);
-        	});
+            $win.resize(function(){
+                reposition(obj);
+            });
 
-			obj.timeout = window.setTimeout(function() {
+            obj.timeout = window.setTimeout(function() {
                 tipso_bubble.appendTo('body').stop(true, true).fadeIn( obj.settings.speed, function(){
-                	obj.mode = 'show';
+                    obj.mode = 'show';
                     if ($.isFunction(obj.settings.onShow)){
                         obj.settings.onShow($(this));
                     }
                 });
             }, obj.settings.delay);
-		},
-		hide: function () {
-			var obj = this,
-			tipso_bubble = this.tooltip();
-			window.clearTimeout( obj.timeout );
-			obj.timeout = null;
+        },
+        hide: function () {
+            var obj = this,
+            tipso_bubble = this.tooltip();
+            window.clearTimeout( obj.timeout );
+            obj.timeout = null;
 
-			tipso_bubble.stop(true, true).fadeOut( obj.settings.speed, function(){
-				$(this).remove();
+            tipso_bubble.stop(true, true).fadeOut( obj.settings.speed, function(){
+                $(this).remove();
                 if ($.isFunction(obj.settings.onHide) && obj.mode == 'show'){
                     obj.settings.onHide($(this));
                 }
                 obj.mode = 'hide';
             });
-		},
-		destroy: function () {
-			$e = this.element;
-	        $e.off('.' + pluginName);
-			$e.removeData(pluginName);
-			$e.removeClass('tipso_style').attr('title', this._title);
-		},
-		content: function () {
-			var content,
+        },
+        destroy: function () {
+            $e = this.element;
+            $e.off('.' + pluginName);
+            $e.removeData(pluginName);
+            $e.removeClass('tipso_style').attr('title', this._title);
+        },
+        content: function () {
+            var content,
             $e = this.element,
             obj = this,
             title = this._title;
-			if(obj.settings.ajaxContentUrl){
-				content = $.ajax({
-						type: "GET",
-						url: obj.settings.ajaxContentUrl,
-						async: false
-					}).responseText;
-			} else if(obj.settings.content){
+            if(obj.settings.ajaxContentUrl){
+                content = $.ajax({
+                        type: "GET",
+                        url: obj.settings.ajaxContentUrl,
+                        async: false
+                    }).responseText;
+            } else if(obj.settings.content){
                 content = obj.settings.content;
             } else {
                 if(obj.settings.useTitle == true){
@@ -140,16 +140,16 @@
                 }
             }
             return content;
-		},
-		update: function (key, value) {
-			var obj = this;
+        },
+        update: function (key, value) {
+            var obj = this;
             if (value) {
                 obj.settings[key] = value;
             } else {
                 return obj.settings[key];
             }
         }
-	});
+    });
 
     function isTouchSupported () {
         var msTouchEnabled = window.navigator.msMaxTouchPoints;
@@ -303,33 +303,33 @@
         tipso_bubble.css( { left: pos_left + obj.settings.offsetX, top: pos_top + obj.settings.offsetY} );
     }
 
-	$[pluginName] = $.fn[pluginName] = function (options) {
-	    var args = arguments;
-	    if (options === undefined || typeof options === 'object') {
-	        if (!(this instanceof $)) {
-	            $.extend(defaults, options);
-	        }
-	        return this.each(function () {
-	            if (!$.data(this, 'plugin_' + pluginName)) {
-	                $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
-	            }
-	        });
-	    } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-	        var returns;
-	        this.each(function () {
-	            var instance = $.data(this, 'plugin_' + pluginName);
-	            if (!instance) {
-	                instance = $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
-	            }
-	            if (instance instanceof Plugin && typeof instance[options] === 'function') {
-	                returns = instance[options].apply(instance, Array.prototype.slice.call(args, 1));
-	            }
-	            if (options === 'destroy') {
-	                $.data(this, 'plugin_' + pluginName, null);
-	            }
-	        });
-	        return returns !== undefined ? returns : this;
-	    }
-	};
+    $[pluginName] = $.fn[pluginName] = function (options) {
+        var args = arguments;
+        if (options === undefined || typeof options === 'object') {
+            if (!(this instanceof $)) {
+                $.extend(defaults, options);
+            }
+            return this.each(function () {
+                if (!$.data(this, 'plugin_' + pluginName)) {
+                    $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+                }
+            });
+        } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
+            var returns;
+            this.each(function () {
+                var instance = $.data(this, 'plugin_' + pluginName);
+                if (!instance) {
+                    instance = $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+                }
+                if (instance instanceof Plugin && typeof instance[options] === 'function') {
+                    returns = instance[options].apply(instance, Array.prototype.slice.call(args, 1));
+                }
+                if (options === 'destroy') {
+                    $.data(this, 'plugin_' + pluginName, null);
+                }
+            });
+            return returns !== undefined ? returns : this;
+        }
+    };
 
 })( jQuery, window, document );
