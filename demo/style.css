@@ -132,7 +132,14 @@ input[type=text]{
 	color: #55b555;
 	font-weight: 700;
 }
-
+.wordpress-info{
+	background: #555555;
+	color: #f5f5f5;
+	font-weight: 600;	
+}
+.wordpress-info a{
+	font-size: 14px;
+}
 
 /**
  * Media query for 960 Screens - sets nested grids to 100%
