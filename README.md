@@ -6,6 +6,7 @@ A Lightweight Responsive jQuery Tooltip Plugin
 [![Build Status](https://travis-ci.org/object505/tipso.svg?branch=master)](https://travis-ci.org/object505/tipso)
 [![NPM version](http://img.shields.io/npm/v/tipso.svg?style=flat)](https://www.npmjs.org/package/tipso)
 [![Bower version](http://img.shields.io/bower/v/tipso.svg?style=flat)](http://bower.io/search/?q=tipso)
+[![Gittip](http://img.shields.io/gratipay/object505.svg?style=flat)](https://gratipay.com/object505/)
 
 >There is also a Wordpress version of this plugin. Get it [here](https://wordpress.org/plugins/tipso/)
 
@@ -51,7 +52,7 @@ A Lightweight Responsive jQuery Tooltip Plugin
 | onShow         | function(){} | Function to be executed after tipso is shown                                          |
 | onHide         | function(){} | Function to be executed after tipso is hidden                                         |
 
-> Additionaly you can use `data-tipso` instead of the title attribute for the tooltip content
+> Additionaly you can use `data-tipso` instead of the title attribute for the tooltip content ( set `useTitle: false` )
 
 ## API
 
@@ -64,6 +65,13 @@ A Lightweight Responsive jQuery Tooltip Plugin
 
 	// Destroy tipso tooltip
 	$('.tipso').tipso('destroy');
+	
+	// Add a callback before tipso is shown
+	$('.tipso').tipso({
+		onBeforeShow: function(){
+			// Your code
+		}
+	});
 
 	// Add a callback when tipso is shown
 	$('.tipso').tipso({
@@ -79,6 +87,12 @@ A Lightweight Responsive jQuery Tooltip Plugin
 		}
 	});
 
+	// Load AJAX content to tipso
+	$('.tipso').tipso({	
+		useTitle: false,
+		ajaxContentUrl : 'ajax.html'
+	});
+
 	// Update tipso options
 	$('.tipso').tipso('update', 'content', 'new content');
 ```
@@ -90,6 +104,7 @@ Here is the link to the [demo][demo]
 ## Bugs
 For bug reports, questions, feature requests, or other suggestions please create an [issue][issue] on GitHub.
 [issue]: https://github.com/object505/tipso/issues/new
+
 
 ## Author
 | ![twitter/BojanPetkovski](http://gravatar.com/avatar/30befed2bed6e1690a6b47cf617f7927?s=105](http://twitter.com/BojanPetkovski "Follow @BojanPetkovski on Twitter") |
