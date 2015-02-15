@@ -1,5 +1,5 @@
 /*!
- * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.1
+ * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.2
  * Copyright (c) 2014 Bojan Petkovski
  * http://tipso.object505.com
  * Licensed under the MIT license
@@ -14,6 +14,8 @@
       position        : 'top',
       width           : 200,
       delay           : 200,
+      animationIn     : 'fadeIn',
+      animationOut    : 'fadeOut',
       offsetX         : 0,
       offsetY         : 0,
       content         : null,
@@ -31,6 +33,12 @@
     this._name = pluginName;
     this._title = this.element.attr('title');
     this.mode = 'hide';
+    this.ieFade = false;
+    if ( _isIE() ) {
+        if ( _isIE() <= 9 ) {
+          this.ieFade = true;
+      } 
+    }
     this.init();
   }
   $.extend(Plugin.prototype, {
@@ -83,13 +91,30 @@
         reposition(obj);
       });
       obj.timeout = window.setTimeout(function() {
-        tipso_bubble.appendTo('body').stop(true, true).fadeIn(obj.settings
+        if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
+          tipso_bubble.appendTo('body').stop(true, true).fadeIn(obj.settings
           .speed, function() {
             obj.mode = 'show';
             if ($.isFunction(obj.settings.onShow)) {
               obj.settings.onShow($(this));
             }
           });
+        } else {
+          tipso_bubble.remove().appendTo('body')
+          .stop(true, true)
+          .removeClass('animated ' + obj.settings.animationOut)
+          .addClass('noAnimation')
+          .removeClass('noAnimation')
+          .addClass('animated ' + obj.settings.animationIn).fadeIn(obj.settings.speed, function() {
+            $(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+              $(this).removeClass('animated ' + obj.settings.animationIn);
+            });
+            obj.mode = 'show';
+            if ($.isFunction(obj.settings.onShow)) {
+              obj.settings.onShow($(this));
+            }
+          });
+        }
       }, obj.settings.delay);
     },
     hide: function() {
@@ -97,7 +122,8 @@
         tipso_bubble = this.tooltip();
       window.clearTimeout(obj.timeout);
       obj.timeout = null;
-      tipso_bubble.stop(true, true).fadeOut(obj.settings.speed,
+      if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
+        tipso_bubble.stop(true, true).fadeOut(obj.settings.speed,
         function() {
           $(this).remove();
           if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
@@ -105,6 +131,19 @@
           }
           obj.mode = 'hide';
         });
+      } else {
+        tipso_bubble.stop(true, true)
+        .removeClass('animated ' + obj.settings.animationIn)
+        .addClass('noAnimation').removeClass('noAnimation')
+        .addClass('animated ' + obj.settings.animationOut)
+        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){          
+          $(this).removeClass('animated ' + obj.settings.animationOut).remove();          
+          if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
+            obj.settings.onHide($(this));
+          }
+          obj.mode = 'hide';
+        });
+      }
     },
     destroy: function() {
       var $e = this.element;
@@ -163,6 +202,11 @@
     return height;
   }
 
+  var _isIE = function () {
+    var ua = navigator.userAgent.toLowerCase();
+    return (ua.indexOf('msie') != -1) ? parseInt(ua.split('msie')[1]) : false;
+  };
+
   function reposition(thisthat) {
     var tipso_bubble = thisthat.tooltip(),
       $e = thisthat.element,
@@ -170,6 +214,10 @@
       $win = $(window),
       arrow = 10,
       pos_top, pos_left, diff;
+
+      if ( $e.parent().outerWidth() > $win.outerWidth() ){
+        $win = $e.parent();
+      }
     switch (obj.settings.position) {
       case 'top':
         pos_left = $e.offset().left + ($e.outerWidth() / 2) - (tipso_bubble

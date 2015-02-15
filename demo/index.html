@@ -6,7 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,600italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="animate.css">
 	<link rel="stylesheet" href="../src/tipso.css">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="../src/tipso.js"></script>
 
@@ -115,6 +117,20 @@
 				useTitle: false
 
 			});
+			// Animate Tipso
+			jQuery('.animate').tipso({
+				animationIn: 'bounceIn',
+				animationOut: 'bounceOut',
+				useTitle: false
+			});
+			jQuery('.animationIn').on('change', function(e){
+				var $this = jQuery(this);
+				jQuery('.animate').tipso('update', 'animationIn', $this.val());				
+			});
+			jQuery('.animationOut').on('change', function(e){
+				var $this = jQuery(this);
+				jQuery('.animate').tipso('update', 'animationOut', $this.val());				
+			});
 
 		});
 		jQuery(window).load(function(){
@@ -130,6 +146,16 @@
 			<div class="row">
 				<div class="c12"><h1>Tipso <span>A Lightweight Responsive jQuery Tooltip Plugin</span></h1></div>
 			</div>
+			<div class="row">
+				<div class="c12">
+					<ul class="social">
+						<li>SHARE ON</li>
+						<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftipso.object505.com%2F&t=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+						<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Ftipso.object505.com%2F&text=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin:%20http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Tweet"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+						<li><a href="https://plus.google.com/share?url=http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Share on Google+"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</header>
 	<a href="https://github.com/object505/tipso"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
@@ -142,7 +168,7 @@
 			</div>
 			<div class="row">
 				<div class="c12">
-					<h3>Getting started</h3>				
+					<h3>Getting started</h3>
 
 <p>1. Include jQuery</p>
 <pre><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
@@ -152,6 +178,9 @@
 <p>2. Include plugin's code</p>
 <pre><code>&lt;link rel="stylesheet" href="/path/to/tipso.css"&gt;
 &lt;script src="/path/to/tipso.js"&gt;&lt;/script&gt;
+</code></pre>
+<p>To use css3 animation effects please include <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a></p>
+<pre><code>&lt;link rel="stylesheet" href="/path/to/animate.css"&gt;
 </code></pre>
 
 <p>3. Call the plugin </p>
@@ -163,20 +192,22 @@
 				<div class="c12">
 					<h3>Defaults</h3>
 <pre><code>jQuery(element).tipso({
-    speed       	: 400,
-    background  	: '#55b555',
-    color       	: '#ffffff',
-    position    	: 'top',
-    width       	: 200,
-    delay       	: 200,
-    offsetX     	: 0,
-    offsetY     	: 0,
-    content     	: null,
-    ajaxContentUrl	: null,
-    useTitle    	: true,
-    onBeforeShow	: null,
-    onShow      	: null,
-    onHide      	: null
+    speed           : 400,
+    background      : '#55b555',
+    color           : '#ffffff',
+    position        : 'top',
+    width           : 200,
+    delay           : 200,
+    animationIn     : 'fadeIn',
+    animationOut    : 'fadeOut',
+    offsetX         : 0,
+    offsetY         : 0,
+    content         : null,
+    ajaxContentUrl  : null,
+    useTitle        : true,
+    onBeforeShow    : null,
+    onShow          : null,
+    onHide          : null
 });</code></pre>
 
 				</div>
@@ -214,6 +245,244 @@ jQuery(window).load(function(){
 
 			<div class="row demo-section">
 				<div class="c6">
+					<h4>Tipso CSS3 Animation</h4>
+					<p>Tipso tooltip with CSS3 <span class="animate" data-tipso="CSS3 Animated TIPSO!">animation</span> effects using <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a></p>
+					<div class="row">
+						<div class="c6">
+							<p>Animation In</p> 
+							<select class="animationIn">
+						        <optgroup label="Attention Seekers">
+						          <option value="bounce">bounce</option>
+						          <option value="flash">flash</option>
+						          <option value="pulse">pulse</option>
+						          <option value="rubberBand">rubberBand</option>
+						          <option value="shake">shake</option>
+						          <option value="swing">swing</option>
+						          <option value="tada">tada</option>
+						          <option value="wobble">wobble</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Entrances">
+						          <option value="bounceIn" selected>bounceIn</option>
+						          <option value="bounceInDown">bounceInDown</option>
+						          <option value="bounceInLeft">bounceInLeft</option>
+						          <option value="bounceInRight">bounceInRight</option>
+						          <option value="bounceInUp">bounceInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Exits">
+						          <option value="bounceOut">bounceOut</option>
+						          <option value="bounceOutDown">bounceOutDown</option>
+						          <option value="bounceOutLeft">bounceOutLeft</option>
+						          <option value="bounceOutRight">bounceOutRight</option>
+						          <option value="bounceOutUp">bounceOutUp</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Entrances">
+						          <option value="fadeIn">fadeIn</option>
+						          <option value="fadeInDown">fadeInDown</option>
+						          <option value="fadeInDownBig">fadeInDownBig</option>
+						          <option value="fadeInLeft">fadeInLeft</option>
+						          <option value="fadeInLeftBig">fadeInLeftBig</option>
+						          <option value="fadeInRight">fadeInRight</option>
+						          <option value="fadeInRightBig">fadeInRightBig</option>
+						          <option value="fadeInUp">fadeInUp</option>
+						          <option value="fadeInUpBig">fadeInUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Exits">
+						          <option value="fadeOut">fadeOut</option>
+						          <option value="fadeOutDown">fadeOutDown</option>
+						          <option value="fadeOutDownBig">fadeOutDownBig</option>
+						          <option value="fadeOutLeft">fadeOutLeft</option>
+						          <option value="fadeOutLeftBig">fadeOutLeftBig</option>
+						          <option value="fadeOutRight">fadeOutRight</option>
+						          <option value="fadeOutRightBig">fadeOutRightBig</option>
+						          <option value="fadeOutUp">fadeOutUp</option>
+						          <option value="fadeOutUpBig">fadeOutUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Flippers">
+						          <option value="flip">flip</option>
+						          <option value="flipInX">flipInX</option>
+						          <option value="flipInY">flipInY</option>
+						          <option value="flipOutX">flipOutX</option>
+						          <option value="flipOutY">flipOutY</option>
+						        </optgroup>
+
+						        <optgroup label="Lightspeed">
+						          <option value="lightSpeedIn">lightSpeedIn</option>
+						          <option value="lightSpeedOut">lightSpeedOut</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Entrances">
+						          <option value="rotateIn">rotateIn</option>
+						          <option value="rotateInDownLeft">rotateInDownLeft</option>
+						          <option value="rotateInDownRight">rotateInDownRight</option>
+						          <option value="rotateInUpLeft">rotateInUpLeft</option>
+						          <option value="rotateInUpRight">rotateInUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Exits">
+						          <option value="rotateOut">rotateOut</option>
+						          <option value="rotateOutDownLeft">rotateOutDownLeft</option>
+						          <option value="rotateOutDownRight">rotateOutDownRight</option>
+						          <option value="rotateOutUpLeft">rotateOutUpLeft</option>
+						          <option value="rotateOutUpRight">rotateOutUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Specials">
+						          <option value="hinge">hinge</option>
+						          <option value="rollIn">rollIn</option>
+						          <option value="rollOut">rollOut</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Entrances">
+						          <option value="zoomIn">zoomIn</option>
+						          <option value="zoomInDown">zoomInDown</option>
+						          <option value="zoomInLeft">zoomInLeft</option>
+						          <option value="zoomInRight">zoomInRight</option>
+						          <option value="zoomInUp">zoomInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Exits">
+						          <option value="zoomOut">zoomOut</option>
+						          <option value="zoomOutDown">zoomOutDown</option>
+						          <option value="zoomOutLeft">zoomOutLeft</option>
+						          <option value="zoomOutRight">zoomOutRight</option>
+						          <option value="zoomOutUp">zoomOutUp</option>
+						        </optgroup>
+						      </select>
+						</div>
+						<div class="c6">
+							<p>Animation Out</p> 
+							<select class="animationOut">
+						        <optgroup label="Attention Seekers">
+						          <option value="bounce">bounce</option>
+						          <option value="flash">flash</option>
+						          <option value="pulse">pulse</option>
+						          <option value="rubberBand">rubberBand</option>
+						          <option value="shake">shake</option>
+						          <option value="swing">swing</option>
+						          <option value="tada">tada</option>
+						          <option value="wobble">wobble</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Entrances">
+						          <option value="bounceIn">bounceIn</option>
+						          <option value="bounceInDown">bounceInDown</option>
+						          <option value="bounceInLeft">bounceInLeft</option>
+						          <option value="bounceInRight">bounceInRight</option>
+						          <option value="bounceInUp">bounceInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Exits">
+						          <option value="bounceOut" selected>bounceOut</option>
+						          <option value="bounceOutDown">bounceOutDown</option>
+						          <option value="bounceOutLeft">bounceOutLeft</option>
+						          <option value="bounceOutRight">bounceOutRight</option>
+						          <option value="bounceOutUp">bounceOutUp</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Entrances">
+						          <option value="fadeIn">fadeIn</option>
+						          <option value="fadeInDown">fadeInDown</option>
+						          <option value="fadeInDownBig">fadeInDownBig</option>
+						          <option value="fadeInLeft">fadeInLeft</option>
+						          <option value="fadeInLeftBig">fadeInLeftBig</option>
+						          <option value="fadeInRight">fadeInRight</option>
+						          <option value="fadeInRightBig">fadeInRightBig</option>
+						          <option value="fadeInUp">fadeInUp</option>
+						          <option value="fadeInUpBig">fadeInUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Exits">
+						          <option value="fadeOut">fadeOut</option>
+						          <option value="fadeOutDown">fadeOutDown</option>
+						          <option value="fadeOutDownBig">fadeOutDownBig</option>
+						          <option value="fadeOutLeft">fadeOutLeft</option>
+						          <option value="fadeOutLeftBig">fadeOutLeftBig</option>
+						          <option value="fadeOutRight">fadeOutRight</option>
+						          <option value="fadeOutRightBig">fadeOutRightBig</option>
+						          <option value="fadeOutUp">fadeOutUp</option>
+						          <option value="fadeOutUpBig">fadeOutUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Flippers">
+						          <option value="flip">flip</option>
+						          <option value="flipInX">flipInX</option>
+						          <option value="flipInY">flipInY</option>
+						          <option value="flipOutX">flipOutX</option>
+						          <option value="flipOutY">flipOutY</option>
+						        </optgroup>
+
+						        <optgroup label="Lightspeed">
+						          <option value="lightSpeedIn">lightSpeedIn</option>
+						          <option value="lightSpeedOut">lightSpeedOut</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Entrances">
+						          <option value="rotateIn">rotateIn</option>
+						          <option value="rotateInDownLeft">rotateInDownLeft</option>
+						          <option value="rotateInDownRight">rotateInDownRight</option>
+						          <option value="rotateInUpLeft">rotateInUpLeft</option>
+						          <option value="rotateInUpRight">rotateInUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Exits">
+						          <option value="rotateOut">rotateOut</option>
+						          <option value="rotateOutDownLeft">rotateOutDownLeft</option>
+						          <option value="rotateOutDownRight">rotateOutDownRight</option>
+						          <option value="rotateOutUpLeft">rotateOutUpLeft</option>
+						          <option value="rotateOutUpRight">rotateOutUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Specials">
+						          <option value="hinge">hinge</option>
+						          <option value="rollIn">rollIn</option>
+						          <option value="rollOut">rollOut</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Entrances">
+						          <option value="zoomIn">zoomIn</option>
+						          <option value="zoomInDown">zoomInDown</option>
+						          <option value="zoomInLeft">zoomInLeft</option>
+						          <option value="zoomInRight">zoomInRight</option>
+						          <option value="zoomInUp">zoomInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Exits">
+						          <option value="zoomOut">zoomOut</option>
+						          <option value="zoomOutDown">zoomOutDown</option>
+						          <option value="zoomOutLeft">zoomOutLeft</option>
+						          <option value="zoomOutRight">zoomOutRight</option>
+						          <option value="zoomOutUp">zoomOutUp</option>
+						        </optgroup>
+						      </select>
+						</div>
+					</div>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+<strong>If you use animate.css</strong>
+jQuery(.tipso).tipso({
+  animationIn: 'bounceIn',
+  animationOut: 'bounceOut'
+});
+
+<strong>If you don't use animate.css</strong>
+jQuery(.tipso).tipso({
+  animationIn: '',
+  animationOut: ''
+});
+</code>
+</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
 					<h4>Click to show/hide tipso</h4>
 					<p>Some <span class="show-hide" data-tipso="This is a manual TIPSO!">content</span></p>
 					<a href="#" class="show-hide-tipso">Click me to show/hide tipso</a>
@@ -237,7 +506,7 @@ jQuery('.show-hide-tipso').on('click', function(e){
 </pre>
 				</div>
 			</div>
-			
+
 			<div class="row demo-section">
 				<div class="c6">
 					<h4>Before show</h4>
@@ -409,11 +678,11 @@ jQuery('.callback-tipso').tipso({
 </pre>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="c12">
 					<p class="author">Made by <a href="http://object505.com">Bojan Petkovski</a></p>
-				</div>				
+				</div>
 			</div>
 
 		</div>

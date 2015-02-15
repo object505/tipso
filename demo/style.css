@@ -57,6 +57,7 @@ body{
 	font-size: 14px;
 	line-height: 20px;
 	color: #555555;
+	overflow-x: hidden;
 }
 h1{
 	font-weight: 700;
@@ -105,7 +106,8 @@ pre span {
 	color: #55b555;
 	font-weight: 700;
 }
-input[type=text]{
+input[type=text],
+select{
 	width: 100%;
 	height: 35px;
 	border-radius: 5px;
@@ -139,6 +141,29 @@ input[type=text]{
 }
 .wordpress-info a{
 	font-size: 14px;
+}
+.social{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	text-align: center;
+}
+.social li{
+	display: inline-block;
+	vertical-align: middle;
+}
+.social li a {
+	text-decoration: none;
+	font-size: 15px;
+	color: #555;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+	outline: none;
+}
+.social li a:hover{
+	color: #55b555;
 }
 
 /**
