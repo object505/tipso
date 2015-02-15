@@ -1,6 +1,6 @@
 /*!
  * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.2
- * Copyright (c) 2014 Bojan Petkovski
+ * Copyright (c) 2014-2015 Bojan Petkovski
  * http://tipso.object505.com
  * Licensed under the MIT license
  * http://object505.mit-license.org/
@@ -14,8 +14,8 @@
       position        : 'top',
       width           : 200,
       delay           : 200,
-      animationIn     : 'fadeIn',
-      animationOut    : 'fadeOut',
+      animationIn     : '',
+      animationOut    : '',
       offsetX         : 0,
       offsetY         : 0,
       content         : null,

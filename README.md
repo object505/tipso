@@ -48,8 +48,8 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 | position       | 'top'        | Initial position of the tooltip, available positions 'top', 'bottom', 'left', 'right'               |
 | width          | 200          | Width of the tooltip in px                                                                          |
 | delay          | 200          | Delay before showing the tooltip in ms                                                              |
-| animationIn    | 'fadeIn'     | CSS3 animation effect to show the tooltip using [Animate.css](http://daneden.github.io/animate.css) |
-| animationOut   | 'fadeOut'    | CSS3 animation effect to hide the tooltip using [Animate.css](http://daneden.github.io/animate.css) |
+| animationIn    | ''           | CSS3 animation effect to show the tooltip using [Animate.css](http://daneden.github.io/animate.css) |
+| animationOut   | ''           | CSS3 animation effect to hide the tooltip using [Animate.css](http://daneden.github.io/animate.css) |
 | offsetX        | 0            | Offset value of the tooltip on X axis                                                               |
 | offsetY        | 0            | Offset value of the tooltip on Y axis                                                               |
 | content        | null         | The content of the tooltip, can be text, html or whatever you want                                  |
