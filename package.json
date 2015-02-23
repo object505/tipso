@@ -24,10 +24,7 @@
   "bugs": {
     "url": "https://github.com/object505/tipso/issues/new"
   },
-  "main": [
-    "src/tipso.min.js",
-    "src/tipso.css"
-  ],
+  "main": "src/tipso.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/object505/tipso.git"
