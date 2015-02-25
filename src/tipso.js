@@ -1,5 +1,5 @@
 /*!
- * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.2
+ * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.4
  * Copyright (c) 2014-2015 Bojan Petkovski
  * http://tipso.object505.com
  * Licensed under the MIT license
@@ -34,10 +34,8 @@
     this._title = this.element.attr('title');
     this.mode = 'hide';
     this.ieFade = false;
-    if ( _isIE() ) {
-        if ( _isIE() <= 9 ) {
-          this.ieFade = true;
-      } 
+    if ( !supportsTransitions ) {        
+      this.ieFade = true;      
     }
     this.init();
   }
@@ -202,10 +200,15 @@
     return height;
   }
 
-  var _isIE = function () {
-    var ua = navigator.userAgent.toLowerCase();
-    return (ua.indexOf('msie') != -1) ? parseInt(ua.split('msie')[1]) : false;
-  };
+  var supportsTransitions = (function() {
+    var s = document.createElement('p').style, 
+        v = ['ms','O','Moz','Webkit'];
+    if( s['transition'] == '' ) return true; 
+    while( v.length ) 
+        if( v.pop() + 'Transition' in s )
+            return true;
+    return false;
+  })();
 
   function reposition(thisthat) {
     var tipso_bubble = thisthat.tooltip(),
