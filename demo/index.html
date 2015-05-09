@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../src/tipso.css">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../src/tipso.js"></script>
+	<script src="../src/tipso.min.js"></script>
 
 	<!--[if lt IE 9]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -38,7 +38,21 @@
 				position: 'top',
 				background: '#F62459',
 				useTitle: false,
+				width: '',
+				maxWidth: 300
 			});
+			jQuery('.hover-tipso-tooltip').tipso({
+				position: 'top',
+				background: '#000',
+				useTitle: false,
+				width: false,
+				maxWidth: 300,
+				tooltipHover: true,
+				content: function(){
+					return 'You can <a href="javascript:;">CLICK ME</a> now!';
+				}
+			});
+
 			// Use Title For Tipso Content
 			jQuery('.title-tipso').tipso();
 			// Tipso for Image
@@ -197,11 +211,13 @@
     color           : '#ffffff',
     position        : 'top',
     width           : 200,
+    maxWidth        : '',
     delay           : 200,
     animationIn     : 'fadeIn',
     animationOut    : 'fadeOut',
     offsetX         : 0,
     offsetY         : 0,
+    tooltipHover    : false,
     content         : null,
     ajaxContentUrl  : null,
     useTitle        : true,
@@ -475,6 +491,23 @@ jQuery(.tipso).tipso({
 jQuery(.tipso).tipso({
   animationIn: '',
   animationOut: ''
+});
+</code>
+</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Interact with tipso tooltip</h4>
+					<p>Some tooltip <span class="hover-tipso-tooltip" data-tipso="This is a manual TIPSO!">content</span> you can interact with</p>
+				</div>
+
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+jQuery('.hover-tipso-tooltip').tipso({
+    tooltipHover: true
 });
 </code>
 </pre>
