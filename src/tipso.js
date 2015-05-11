@@ -307,8 +307,7 @@
         }
         break;
       case 'bottom':
-        pos_left = $e.offset().left + ($e.outerWidth() / 2) - (tipso_bubble
-          .outerWidth() / 2);
+        pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
         pos_top = $e.offset().top + $e.outerHeight() + arrow;
         tipso_bubble.find('.tipso_arrow').css({
           marginLeft: -8,
