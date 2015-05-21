@@ -54,7 +54,7 @@
           obj.mode == 'hide' ? obj.show() : obj.hide();
           e.stopPropagation();
         });
-        $(document).on('click', function() {
+        $doc.on('click', function closeTipso () {
           if (obj.mode == 'show') {
             obj.hide();
           }
@@ -136,8 +136,8 @@
         }
         tipso_bubble.find('.tipso_content').html(obj.content());
         reposition(obj);
-        $win.resize(function() {
-          reposition(obj);
+        $win.resize(function tipsoResizeHandler () {
+            reposition(obj);
         });
         obj.timeout = window.setTimeout(function() {
           if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
@@ -162,6 +162,7 @@
               if ($.isFunction(obj.settings.onShow)) {
                 obj.settings.onShow($(this));
               }
+              $win.off('resize', null, 'tipsoResizeHandler');
             });
           }
         }, obj.settings.delay);
@@ -183,27 +184,33 @@
               obj.settings.onHide($(this));
             }
             obj.mode = 'hide';
+            $win.off('resize', null, 'tipsoResizeHandler');
           });
         } else {
           tipso_bubble.stop(true, true)
           .removeClass('animated ' + obj.settings.animationIn)
           .addClass('noAnimation').removeClass('noAnimation')
           .addClass('animated ' + obj.settings.animationOut)
-          .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){          
-            $(this).removeClass('animated ' + obj.settings.animationOut).remove();          
+          .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass('animated ' + obj.settings.animationOut).remove();
             if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
               obj.settings.onHide($(this));
             }
             obj.mode = 'hide';
+            $win.off('resize', null, 'tipsoResizeHandler');
           });
         }
-      }      
+      }
     },
     destroy: function() {
       var $e = this.element,
         $win = this.win,
         $doc = this.doc;
       $e.off('.' + pluginName);
+      $win.off('resize', null, 'tipsoResizeHandler');
+      if (isTouchSupported()) {
+        $doc.off('click', null, 'closeTipso' );
+      }
       $e.removeData(pluginName);
       $e.removeClass('tipso_style').attr('title', this._title);
     },
