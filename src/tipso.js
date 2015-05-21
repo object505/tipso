@@ -30,6 +30,8 @@
 
   function Plugin(element, options) {
     this.element = $(element);
+    this.doc = $(document);
+    this.win = $(window);
     this.settings = $.extend({}, defaults, options);
     this._defaults = defaults;
     this._name = pluginName;
@@ -44,7 +46,8 @@
   $.extend(Plugin.prototype, {
     init: function() {
       var obj = this,
-        $e = this.element;
+        $e = this.element,
+        $doc = this.doc;
       $e.addClass('tipso_style').removeAttr('title');
       if (isTouchSupported()) {
         $e.on('click' + '.' + pluginName, function(e) {
@@ -106,7 +109,7 @@
     show: function() {
       var tipso_bubble = this.tooltip(),
         obj = this,
-        $win = $(window);
+        $win = this.win;
 
       if (obj.mode == 'hide') {
         if ($.isFunction(obj.settings.onBeforeShow)) {
@@ -166,11 +169,12 @@
     },
     hide: function() {
       var obj = this,
+        $win = this.win;
         tipso_bubble = this.tooltip();
 
       window.clearTimeout(obj.timeout);
       obj.timeout = null;
-      if (obj.mode != 'tooltipHover') {  
+      if (obj.mode != 'tooltipHover') {
         if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
           tipso_bubble.stop(true, true).fadeOut(obj.settings.speed,
           function() {
@@ -196,7 +200,9 @@
       }      
     },
     destroy: function() {
-      var $e = this.element;
+      var $e = this.element,
+        $win = this.win,
+        $doc = this.doc;
       $e.off('.' + pluginName);
       $e.removeData(pluginName);
       $e.removeClass('tipso_style').attr('title', this._title);
