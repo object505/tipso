@@ -37,10 +37,8 @@
     this._name = pluginName;
     this._title = this.element.attr('title');
     this.mode = 'hide';
-    this.ieFade = false;
-    if ( !supportsTransitions ) {        
-      this.ieFade = true;      
-    }
+    this.ieFade = !supportsTransitions;
+
     this.init();
   }
   $.extend(Plugin.prototype, {
