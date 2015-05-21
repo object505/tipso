@@ -75,16 +75,18 @@
               obj.hide(); 
             }, 200);     
 
-            $(obj.tooltip()).on('mouseover' + '.' + pluginName, function() {
-              obj.mode = 'tooltipHover';
-            });  
-            $(obj.tooltip()).on('mouseout' + '.' + pluginName, function() {
-              obj.mode = 'show';
-              clearTimeout(waitForHover);
-              waitForHover = setTimeout(function(){              
-                obj.hide();
-              }, 200);
-            });       
+            obj.tooltip()
+              .on('mouseover' + '.' + pluginName, function() {
+                obj.mode = 'tooltipHover';
+              })
+              .on('mouseout' + '.' + pluginName, function() {
+                obj.mode = 'show';
+                clearTimeout(waitForHover);
+                waitForHover = setTimeout(function(){
+                  obj.hide();
+                }, 200);
+              })
+          ;
           });
         } else {
           $e.on('mouseover' + '.' + pluginName, function() {
