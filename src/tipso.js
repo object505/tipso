@@ -30,28 +30,29 @@
 
   function Plugin(element, options) {
     this.element = $(element);
+    this.doc = $(document);
+    this.win = $(window);
     this.settings = $.extend({}, defaults, options);
     this._defaults = defaults;
     this._name = pluginName;
     this._title = this.element.attr('title');
     this.mode = 'hide';
-    this.ieFade = false;
-    if ( !supportsTransitions ) {        
-      this.ieFade = true;      
-    }
+    this.ieFade = !supportsTransitions;
+
     this.init();
   }
   $.extend(Plugin.prototype, {
     init: function() {
       var obj = this,
-        $e = this.element;
+        $e = this.element,
+        $doc = this.doc;
       $e.addClass('tipso_style').removeAttr('title');
       if (isTouchSupported()) {
         $e.on('click' + '.' + pluginName, function(e) {
           obj.mode == 'hide' ? obj.show() : obj.hide();
           e.stopPropagation();
         });
-        $(document).on('click', function() {
+        $doc.on('click', function closeTipso () {
           if (obj.mode == 'show') {
             obj.hide();
           }
@@ -74,16 +75,18 @@
               obj.hide(); 
             }, 200);     
 
-            $(obj.tooltip()).on('mouseover' + '.' + pluginName, function() {
-              obj.mode = 'tooltipHover';
-            });  
-            $(obj.tooltip()).on('mouseout' + '.' + pluginName, function() {
-              obj.mode = 'show';
-              clearTimeout(waitForHover);
-              waitForHover = setTimeout(function(){              
-                obj.hide();
-              }, 200);
-            });       
+            obj.tooltip()
+              .on('mouseover' + '.' + pluginName, function() {
+                obj.mode = 'tooltipHover';
+              })
+              .on('mouseout' + '.' + pluginName, function() {
+                obj.mode = 'show';
+                clearTimeout(waitForHover);
+                waitForHover = setTimeout(function(){
+                  obj.hide();
+                }, 200);
+              })
+          ;
           });
         } else {
           $e.on('mouseover' + '.' + pluginName, function() {
@@ -106,7 +109,7 @@
     show: function() {
       var tipso_bubble = this.tooltip(),
         obj = this,
-        $win = $(window);
+        $win = this.win;
 
       if (obj.mode == 'hide') {
         if ($.isFunction(obj.settings.onBeforeShow)) {
@@ -133,8 +136,8 @@
         }
         tipso_bubble.find('.tipso_content').html(obj.content());
         reposition(obj);
-        $win.resize(function() {
-          reposition(obj);
+        $win.resize(function tipsoResizeHandler () {
+            reposition(obj);
         });
         obj.timeout = window.setTimeout(function() {
           if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
@@ -159,6 +162,7 @@
               if ($.isFunction(obj.settings.onShow)) {
                 obj.settings.onShow($(this));
               }
+              $win.off('resize', null, 'tipsoResizeHandler');
             });
           }
         }, obj.settings.delay);
@@ -166,11 +170,12 @@
     },
     hide: function() {
       var obj = this,
+        $win = this.win;
         tipso_bubble = this.tooltip();
 
       window.clearTimeout(obj.timeout);
       obj.timeout = null;
-      if (obj.mode != 'tooltipHover') {  
+      if (obj.mode != 'tooltipHover') {
         if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
           tipso_bubble.stop(true, true).fadeOut(obj.settings.speed,
           function() {
@@ -179,25 +184,33 @@
               obj.settings.onHide($(this));
             }
             obj.mode = 'hide';
+            $win.off('resize', null, 'tipsoResizeHandler');
           });
         } else {
           tipso_bubble.stop(true, true)
           .removeClass('animated ' + obj.settings.animationIn)
           .addClass('noAnimation').removeClass('noAnimation')
           .addClass('animated ' + obj.settings.animationOut)
-          .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){          
-            $(this).removeClass('animated ' + obj.settings.animationOut).remove();          
+          .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass('animated ' + obj.settings.animationOut).remove();
             if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
               obj.settings.onHide($(this));
             }
             obj.mode = 'hide';
+            $win.off('resize', null, 'tipsoResizeHandler');
           });
         }
-      }      
+      }
     },
     destroy: function() {
-      var $e = this.element;
+      var $e = this.element,
+        $win = this.win,
+        $doc = this.doc;
       $e.off('.' + pluginName);
+      $win.off('resize', null, 'tipsoResizeHandler');
+      if (isTouchSupported()) {
+        $doc.off('click', null, 'closeTipso' );
+      }
       $e.removeData(pluginName);
       $e.removeClass('tipso_style').attr('title', this._title);
     },
