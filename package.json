@@ -30,5 +30,16 @@
     "url": "https://github.com/object505/tipso.git"
   },
   "homepage": "https://github.com/object505/tipso",
-  "license": "MIT"  
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": ">=0.4.5",
+    "grunt-contrib-jshint": "~0.11.1",
+    "grunt-contrib-uglify": "^0.8.0",
+    "grunt-sass": "^1.0.0",
+    "load-grunt-config": "^0.10.0",
+    "load-grunt-tasks": "^0.4.0"
+  },
+  "dependencies": {
+    "node-sass": "^3.1.2"
+  }
 }
