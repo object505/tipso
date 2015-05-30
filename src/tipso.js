@@ -5,7 +5,19 @@
  * Licensed under the MIT license
  * http://object505.mit-license.org/
  */
-;(function($, window, document, undefined) {
+ // CommonJS, AMD or browser globals
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node/CommonJS
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function($) {
   var pluginName = "tipso",
     defaults = {
       speed           : 400,
@@ -66,14 +78,14 @@
             clearTimeout(hoverHelper);
             hoverHelper = setTimeout(function(){
               obj.show();
-            }, 150);            
+            }, 150);
           });
-          $e.on('mouseout' + '.' + pluginName, function() {            
+          $e.on('mouseout' + '.' + pluginName, function() {
             clearTimeout(waitForHover);
             clearTimeout(hoverHelper);
-            waitForHover = setTimeout(function(){              
-              obj.hide(); 
-            }, 200);     
+            waitForHover = setTimeout(function(){
+              obj.hide();
+            }, 200);
 
             obj.tooltip()
               .on('mouseover' + '.' + pluginName, function() {
@@ -118,19 +130,19 @@
         if (obj.settings.width){
           tipso_bubble.css({
             background: obj.settings.background,
-            color: obj.settings.color,       
+            color: obj.settings.color,
             width: obj.settings.width
           }).hide();
         } else if (obj.settings.maxWidth){
           tipso_bubble.css({
             background: obj.settings.background,
-            color: obj.settings.color,       
+            color: obj.settings.color,
             maxWidth: obj.settings.maxWidth
           }).hide();
         } else {
           tipso_bubble.css({
             background: obj.settings.background,
-            color: obj.settings.color,       
+            color: obj.settings.color,
             width: 200
           }).hide();
         }
@@ -270,10 +282,10 @@
   }
 
   var supportsTransitions = (function() {
-    var s = document.createElement('p').style, 
+    var s = document.createElement('p').style,
         v = ['ms','O','Moz','Webkit'];
-    if( s['transition'] == '' ) return true; 
-    while( v.length ) 
+    if( s['transition'] == '' ) return true;
+    while( v.length )
         if( v.pop() + 'Transition' in s )
             return true;
     return false;
@@ -543,4 +555,4 @@
       return returns !== undefined ? returns : this;
     }
   };
-})(jQuery, window, document);
+}));
