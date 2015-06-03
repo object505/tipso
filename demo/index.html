@@ -10,6 +10,10 @@
 	<link rel="stylesheet" href="../src/tipso.css">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" charset="utf-8"></script>
+	<script type="text/template" id="template_sample">
+		This is a test <%= name %>.
+	</script>
 	<script src="../src/tipso.js"></script>
 
 	<!--[if lt IE 9]>
@@ -131,13 +135,23 @@
 				color: '#eee',
 				useTitle: false,
 				size: 'default',
-				content: 'fh fjsdkfjs fjdlskfj  glkhdfkhg ghdfgkjhk dsjkfhskjdhfsfdslkfjsdlkfjsldkf fjsdlkj'
+				contentElementId: 'template_sample',
+				templateEngineFunc: function(content){
+					var compiled = _.template(content);
+					var names = ['moa', 'sara', 'james', 'hugo', 'mehr'];
+					return compiled({name: _.sample(names)});
+				},
+				content: 'fh fjsdkfjs fjdlskfj  glkhdfkhg ghdfgkjhk dsjkfhskjdhfsfdslkfjsdlkfjsldkf fjsdlkj',
+				titleContent: 'Title bar',
+				onBeforeShow: function(ele, tipso) {
+					ele.tipso('update', 'content', '');
+				}
 			});
 			// Animate Tipso
 			jQuery('.animate').tipso({
 				animationIn: 'bounceIn',
 				animationOut: 'bounceOut',
-				useTitle: false
+				useTitle: false,
 			});
 			jQuery('.animationIn').on('change', function(e){
 				var $this = jQuery(this);

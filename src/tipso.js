@@ -20,27 +20,29 @@
 }(function($) {
   var pluginName = "tipso",
     defaults = {
-      speed           : 400,
-      background      : '#55b555',
-      titleBackground : '#333333',
-      color           : '#ffffff',
-      titleContent    : '',
-      showArrow       : true,
-      position        : 'top',
-      width           : 200,
-      maxWidth        : '',
-      delay           : 200,
-      animationIn     : '',
-      animationOut    : '',
-      offsetX         : 0,
-      offsetY         : 0,
-      tooltipHover    : false,
-      content         : null,
-      ajaxContentUrl  : null,
-      useTitle        : true,
-      onBeforeShow    : null,
-      onShow          : null,
-      onHide          : null
+      speed             : 400,          //Animation speed
+      background        : '#55b555',
+      titleBackground   : '#333333',
+      color             : '#ffffff',
+      titleContent      : '',           //Content of the title bar
+      showArrow         : true,
+      position          : 'top',
+      width             : 200,
+      maxWidth          : '',
+      delay             : 200,
+      animationIn       : '',
+      animationOut      : '',
+      offsetX           : 0,
+      offsetY           : 0,
+      tooltipHover      : false,
+      content           : null,
+      ajaxContentUrl    : null,
+      contentElementId  : null,         //Normally used for picking template scripts
+      useTitle          : true,         //Use the title tag as tooptip or not
+      templateEngineFunc: null,         //A function that compiles and renders the content
+      onBeforeShow      : null,
+      onShow            : null,
+      onHide            : null
     };
 
   function Plugin(element, options) {
@@ -135,7 +137,7 @@
 
       if (obj.mode == 'hide') {
         if ($.isFunction(obj.settings.onBeforeShow)) {
-          obj.settings.onBeforeShow(this.element, $(this));
+          obj.settings.onBeforeShow(this.element, this);
         }
         if (obj.settings.size) {
             tipso_bubble.addClass(obj.settings.size);
@@ -266,14 +268,23 @@
           url: obj.settings.ajaxContentUrl,
           async: false
         }).responseText;
-      } else if (obj.settings.content) {
+      }
+      else if (obj.settings.contentElementId) {
+        content = $("#" + obj.settings.contentElementId).text();
+      }
+      else if (obj.settings.content) {
         content = obj.settings.content;
-      } else {
+      }
+      else {
         if (obj.settings.useTitle === true) {
           content = title;
-        } else {
+        }
+        else {
           content = $e.data('tipso');
         }
+      }
+      if (obj.settings.templateEngineFunc != null) {
+          content = obj.settings.templateEngineFunc(content);
       }
       return content;
     },
