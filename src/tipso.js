@@ -24,6 +24,7 @@
       background      : '#55b555',
       titleBackground : '#333333',
       color           : '#ffffff',
+      titleContent    : '',
       position        : 'top',
       width           : 200,
       maxWidth        : '',
@@ -319,6 +320,12 @@
       arrow = 10,
       pos_top, pos_left, diff;
 
+      var arrow_color = obj.settings.background;
+      var title_content = obj.titleContent();
+      if (title_content != undefined && title_content != '') {
+          arrow_color = obj.settings.titleBackground;
+      }
+
       if ( $e.parent().outerWidth() > $win.outerWidth() ){
         $win = $e.parent();
       }
@@ -332,12 +339,14 @@
         });
         if (pos_top < $win.scrollTop()) {
           pos_top = $e.offset().top + $e.outerHeight() + arrow;
+
           tipso_bubble.find('.tipso_arrow').css({
-            'border-bottom-color': obj.settings.titleBackground,
+            'border-bottom-color': arrow_color,
             'border-top-color': 'transparent',
             'border-left-color': 'transparent',
             'border-right-color': 'transparent'
           });
+
           tipso_bubble.removeClass('top bottom left right');
           tipso_bubble.addClass('bottom');
         } else {
@@ -370,7 +379,7 @@
           tipso_bubble.addClass('top');
         } else {
           tipso_bubble.find('.tipso_arrow').css({
-            'border-bottom-color': obj.settings.titleBackground,
+            'border-bottom-color': arrow_color,
             'border-top-color': 'transparent',
             'border-left-color': 'transparent',
             'border-right-color': 'transparent'
@@ -464,7 +473,7 @@
       if (pos_top < $win.scrollTop()) {
         pos_top = $e.offset().top + $e.outerHeight() + arrow;
         tipso_bubble.find('.tipso_arrow').css({
-          'border-bottom-color': obj.settings.background,
+          'border-bottom-color': arrow_color,
           'border-top-color': 'transparent',
           'border-left-color': 'transparent',
           'border-right-color': 'transparent'
@@ -506,7 +515,7 @@
       if (pos_top < $win.scrollTop()) {
         pos_top = $e.offset().top + $e.outerHeight() + arrow;
         tipso_bubble.find('.tipso_arrow').css({
-          'border-bottom-color': obj.settings.background,
+          'border-bottom-color': arrow_color,
           'border-top-color': 'transparent',
           'border-left-color': 'transparent',
           'border-right-color': 'transparent'
