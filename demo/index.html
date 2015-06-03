@@ -58,12 +58,22 @@
 				}
 			});
 
+			jQuery('.top-right').tipso({
+				position: 'top-right',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
 			// Use Title For Tipso Content
 			jQuery('.title-tipso').tipso({useTitle: true});
 			// Tipso for Image
 			jQuery('.img-tipso').tipso({
 				useTitle: false,
-				background: 'rgba(0,0,0,0.8)'
+				background: 'rgba(0,0,0,0.8)',
+				position: 'top-right'
 			});
 			// Show - Hide Tipso on Click
 			jQuery('.show-hide').tipso({
@@ -180,6 +190,7 @@
 		jQuery(window).load(function(){
 			// Show Tipso on Load
 			jQuery('.page-load').tipso('show');
+			jQuery('.top-right').tipso('show');
 		});
 	</script>
 
@@ -271,7 +282,13 @@
 					<h4>Position top, bottom, left and right</h4>
 					<p>Lorem ipsum dolor sit <span class="left" title="tipso" data-tipso="This is a left TIPSO!">left</span>, consectetur adipisicing elit. Minima <span class="top" title="tipso" data-tipso="This is a top TIPSO!">top</span> nostrum, quia inventore ullam consequuntur velit <span class="right" title="tipso" data-tipso-title="This is a title" data-tipso="This is a right TIPSO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus dolorum eum aliquam obcaecati doloremque odio at, laborum, non nobis eveniet dolor explicabo et ut facilis nam soluta libero veritatis! Id.">right</span> fuga officiis non repellendus ea qui nihil delectus, <span class="bottom" title="tipso" data-tipso="This is a bottom TIPSO!">bottom</span> eligendi accusamus ratione odio.</p>
 				</div>
+			</div>
 
+			<div class="row demo-section">
+				<div class="c12">
+					<h4>Corner positions</h4>
+					<p>Lorem ipsum dolor sit <span class="top-right" title="tipso" data-tipso="This is a top-right TIPSO!">top-right</span></p>
+				</div>
 			</div>
 
 			<div class="row demo-section">

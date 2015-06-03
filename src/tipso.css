@@ -80,3 +80,11 @@
 	right: 100%;
 	margin-top: -8px;
 }
+
+.tipso_bubble .top_right_corner, .tipso_bubble.top_right_corner {
+	border-bottom-left-radius: 0;
+}
+
+.tipso_bubble .bottom_right_corner, .tipso_bubble.bottom_right_corner  {
+	border-top-left-radius: 0;
+}
