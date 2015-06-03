@@ -63,7 +63,6 @@ h1{
 	font-size: 55px;
 	line-height: normal;
 	margin: 20px 0;
-	color: #55b555;
 }
 h1 span{
 	font-weight: 600;
@@ -71,7 +70,7 @@ h1 span{
 	font-size: 22px;
 	line-height: normal;
 	margin: 20px 0;
-	color: #5bbbbb;
+	color: 'tomato';
 }
 h3{
 	font-weight: 600;
@@ -94,7 +93,6 @@ a{
 	color: #5bbbbb;
 }
 #main{
-	padding: 55px 0;
 	overflow: hidden;
 }
 pre {

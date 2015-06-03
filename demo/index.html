@@ -26,6 +26,7 @@
 			jQuery('.right').tipso({
 				position: 'right',
 				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
 				useTitle: false,
 			});
 			jQuery('.left').tipso({
@@ -130,18 +131,18 @@
 				}
 			});
 			jQuery('.page-load').tipso({
-				position: 'left',
+				position: 'top',
 				background: '#55b555',
 				color: '#eee',
 				useTitle: false,
-				size: 'default',
+				size: 'large',
 				contentElementId: 'template_sample',
 				templateEngineFunc: function(content){
 					var compiled = _.template(content);
 					var names = ['moa', 'sara', 'james', 'hugo', 'mehr'];
 					return compiled({name: _.sample(names)});
 				},
-				content: 'fh fjsdkfjs fjdlskfj  glkhdfkhg ghdfgkjhk dsjkfhskjdhfsfdslkfjsdlkfjsldkf fjsdlkj',
+				content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores velit, animi necessitatibus? Odio repudiandae vero',
 				titleContent: 'Title bar',
 				onBeforeShow: function(ele, tipso) {
 					ele.tipso('update', 'content', '');
@@ -174,26 +175,22 @@
 	<header>
 		<div class="grid w960">
 			<div class="row">
-				<div class="c12"><h1>Tipso <span>A Lightweight Responsive jQuery Tooltip Plugin</span></h1></div>
-			</div>
-			<div class="row">
-				<div class="c12">
-					<ul class="social">
-						<li>SHARE ON</li>
-						<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftipso.object505.com%2F&t=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-						<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Ftipso.object505.com%2F&text=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin:%20http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Tweet"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-						<li><a href="https://plus.google.com/share?url=http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Share on Google+"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-					</ul>
-				</div>
+				<div class="c12"><h1>Tipso <span>(Forked version with template engine support)</span></h1></div>
 			</div>
 		</div>
 	</header>
-	<a href="https://github.com/object505/tipso"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+	<a href="https://github.com/auxiliary/tipso"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 	<div id="main">
 		<div class="grid w960">
-			<div class="row wordpress-info">
+			<div class="row">
 				<div class="c12">
-					<p>There is also a Wordpress version of this plugin. GET IT <a href="https://wordpress.org/plugins/tipso/" target="_blank">HERE</a></p>
+					<p>This fork has changed from the original <a href="https://github.com/object505/tipso">Tipso</a> in the following ways: </p>
+					<ul>
+						<li>Template engine support added</li>
+						<li>Title bar added</li>
+						<li>Size option added (similar to Foundation's syntax)</li>
+						<li>Events send the element for easier updating</li>
+					</ul>
 				</div>
 			</div>
 			<div class="row">
