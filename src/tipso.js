@@ -22,6 +22,7 @@
     defaults = {
       speed           : 400,
       background      : '#55b555',
+      titleBackground : '#333333',
       color           : '#ffffff',
       position        : 'top',
       width           : 200,
@@ -113,7 +114,7 @@
     tooltip: function() {
       if (!this.tipso_bubble) {
         this.tipso_bubble = $(
-          '<div class="tipso_bubble"><div class="tipso_content"></div><div class="tipso_arrow"></div></div>'
+          '<div class="tipso_bubble"><div class="tipso_title">Hello World</div><div class="tipso_content"></div><div class="tipso_arrow"></div></div>'
         );
       }
       return this.tipso_bubble;
@@ -146,6 +147,9 @@
             width: 200
           }).hide();
         }
+        tipso_bubble.find('.tipso_title').css({
+            background: obj.settings.titleBackground,
+        });
         tipso_bubble.find('.tipso_content').html(obj.content());
         reposition(obj);
         $win.resize(function tipsoResizeHandler () {
@@ -308,12 +312,12 @@
         pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
         tipso_bubble.find('.tipso_arrow').css({
           marginLeft: -8,
-          marginTop: ''
+          marginTop: '',
         });
         if (pos_top < $win.scrollTop()) {
           pos_top = $e.offset().top + $e.outerHeight() + arrow;
           tipso_bubble.find('.tipso_arrow').css({
-            'border-bottom-color': obj.settings.background,
+            'border-bottom-color': obj.settings.titleBackground,
             'border-top-color': 'transparent',
             'border-left-color': 'transparent',
             'border-right-color': 'transparent'
@@ -336,7 +340,7 @@
         pos_top = $e.offset().top + $e.outerHeight() + arrow;
         tipso_bubble.find('.tipso_arrow').css({
           marginLeft: -8,
-          marginTop: ''
+          marginTop: '',
         });
         if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight()) {
           pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
@@ -350,7 +354,7 @@
           tipso_bubble.addClass('top');
         } else {
           tipso_bubble.find('.tipso_arrow').css({
-            'border-bottom-color': obj.settings.background,
+            'border-bottom-color': obj.settings.titleBackground,
             'border-top-color': 'transparent',
             'border-left-color': 'transparent',
             'border-right-color': 'transparent'

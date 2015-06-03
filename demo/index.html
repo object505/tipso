@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../src/tipso.css">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../src/tipso.min.js"></script>
+	<script src="../src/tipso.js"></script>
 
 	<!--[if lt IE 9]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -126,8 +126,8 @@
 			});
 			jQuery('.page-load').tipso({
 				position: 'left',
-				background: 'rgb(236,236,236)',
-				color: '#663399',
+				background: '#55b555',
+				color: '#eee',
 				useTitle: false
 
 			});
@@ -139,11 +139,11 @@
 			});
 			jQuery('.animationIn').on('change', function(e){
 				var $this = jQuery(this);
-				jQuery('.animate').tipso('update', 'animationIn', $this.val());				
+				jQuery('.animate').tipso('update', 'animationIn', $this.val());
 			});
 			jQuery('.animationOut').on('change', function(e){
 				var $this = jQuery(this);
-				jQuery('.animate').tipso('update', 'animationOut', $this.val());				
+				jQuery('.animate').tipso('update', 'animationOut', $this.val());
 			});
 
 		});
@@ -265,7 +265,7 @@ jQuery(window).load(function(){
 					<p>Tipso tooltip with CSS3 <span class="animate" data-tipso="CSS3 Animated TIPSO!">animation</span> effects using <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a></p>
 					<div class="row">
 						<div class="c6">
-							<p>Animation In</p> 
+							<p>Animation In</p>
 							<select class="animationIn">
 						        <optgroup label="Attention Seekers">
 						          <option value="bounce">bounce</option>
@@ -371,7 +371,7 @@ jQuery(window).load(function(){
 						      </select>
 						</div>
 						<div class="c6">
-							<p>Animation Out</p> 
+							<p>Animation Out</p>
 							<select class="animationOut">
 						        <optgroup label="Attention Seekers">
 						          <option value="bounce">bounce</option>
