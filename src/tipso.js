@@ -128,7 +128,10 @@
         if ($.isFunction(obj.settings.onBeforeShow)) {
           obj.settings.onBeforeShow($(this));
         }
-        if (obj.settings.width){
+        if (obj.settings.size) {
+            tipso_bubble.addClass(obj.settings.size);
+        }
+        if (obj.settings.width) {
           tipso_bubble.css({
             background: obj.settings.background,
             color: obj.settings.color,
