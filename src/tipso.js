@@ -38,7 +38,7 @@
       content           : null,
       ajaxContentUrl    : null,
       contentElementId  : null,         //Normally used for picking template scripts
-      useTitle          : true,         //Use the title tag as tooptip or not
+      useTitle          : false,         //Use the title tag as tooptip or not
       templateEngineFunc: null,         //A function that compiles and renders the content
       onBeforeShow      : null,
       onShow            : null,
@@ -176,7 +176,7 @@
             .speed, function() {
               obj.mode = 'show';
               if ($.isFunction(obj.settings.onShow)) {
-                obj.settings.onShow($(this));
+                obj.settings.onShow(this.element, this);
               }
             });
           } else {
@@ -191,7 +191,7 @@
               });
               obj.mode = 'show';
               if ($.isFunction(obj.settings.onShow)) {
-                obj.settings.onShow($(this));
+                obj.settings.onShow(this.element, this);
               }
               $win.off('resize', null, 'tipsoResizeHandler');
             });
@@ -212,7 +212,7 @@
           function() {
             $(this).remove();
             if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
-              obj.settings.onHide($(this));
+              obj.settings.onHide(this.element, this);
             }
             obj.mode = 'hide';
             $win.off('resize', null, 'tipsoResizeHandler');
@@ -225,7 +225,7 @@
           .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
             $(this).removeClass('animated ' + obj.settings.animationOut).remove();
             if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
-              obj.settings.onHide($(this));
+              obj.settings.onHide(this.element, this);
             }
             obj.mode = 'hide';
             $win.off('resize', null, 'tipsoResizeHandler');

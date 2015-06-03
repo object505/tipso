@@ -9,6 +9,7 @@ This fork has changed from the original TIPSO in the following ways:
 - Title bar added
 - Size option added (similar to Foundation's syntax)
 - Events send the element for easier updating
+- Show/Hide arrow option added
 
 ## Getting started
 
@@ -29,7 +30,7 @@ This fork has changed from the original TIPSO in the following ways:
 To use css3 animation effects please include [Animate.css](http://daneden.github.io/animate.css)
 
 	```html
-	<link rel="stylesheet" href="/path/to/animate.css">	
+	<link rel="stylesheet" href="/path/to/animate.css">
 	```
 
 3. Call the plugin
@@ -74,7 +75,7 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 
 	// Destroy tipso tooltip
 	$('.tipso').tipso('destroy');
-	
+
 	// Add a callback before tipso is shown
 	$('.tipso').tipso({
 		onBeforeShow: function(){
@@ -97,7 +98,7 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 	});
 
 	// Load AJAX content to tipso
-	$('.tipso').tipso({	
+	$('.tipso').tipso({
 		useTitle: false,
 		ajaxContentUrl : 'ajax.html'
 	});
