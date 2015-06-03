@@ -114,7 +114,7 @@
     tooltip: function() {
       if (!this.tipso_bubble) {
         this.tipso_bubble = $(
-          '<div class="tipso_bubble"><div class="tipso_title">Hello World</div><div class="tipso_content"></div><div class="tipso_arrow"></div></div>'
+          '<div class="tipso_bubble"><div class="tipso_title"></div><div class="tipso_content"></div><div class="tipso_arrow"></div></div>'
         );
       }
       return this.tipso_bubble;
@@ -151,6 +151,7 @@
             background: obj.settings.titleBackground,
         });
         tipso_bubble.find('.tipso_content').html(obj.content());
+        tipso_bubble.find('.tipso_title').html(obj.titleContent());
         reposition(obj);
         $win.resize(function tipsoResizeHandler () {
             reposition(obj);
@@ -229,6 +230,18 @@
       }
       $e.removeData(pluginName);
       $e.removeClass('tipso_style').attr('title', this._title);
+    },
+    titleContent: function() {
+        var content,
+          $e = this.element,
+          obj = this;
+        if (obj.settings.titleContent) {
+            content = obj.settings.titleContent;
+        }
+        else {
+            content = $e.data('tipso-title')
+        }
+        return content;
     },
     content: function() {
       var content,
