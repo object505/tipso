@@ -99,16 +99,12 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 	$('.tipso').tipso('update', 'content', 'new content');
 ```
 
-## Demo
-Here is the link to the [demo][demo]
-[demo]: http://tipso.object505.com
-
 ## Bugs
 For bug reports, questions, feature requests, or other suggestions please create an [issue][issue] on GitHub.
-[issue]: https://github.com/object505/tipso/issues/new
+[issue]: https://github.com/auxiliary/tipso/issues/new
 
 
-## Author
+## Original Author
 | ![twitter/BojanPetkovski](http://gravatar.com/avatar/30befed2bed6e1690a6b47cf617f7927?s=105](http://twitter.com/BojanPetkovski "Follow @BojanPetkovski on Twitter") |
 |---|
 | [Bojan Petkovski](http://object505.com) |
