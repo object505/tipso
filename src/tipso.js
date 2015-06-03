@@ -25,6 +25,7 @@
       titleBackground : '#333333',
       color           : '#ffffff',
       titleContent    : '',
+      showArrow       : true,
       position        : 'top',
       width           : 200,
       maxWidth        : '',
@@ -125,9 +126,16 @@
         obj = this,
         $win = this.win;
 
+      if (obj.settings.showArrow == false) {
+          tipso_bubble.find(".tipso_arrow").hide();
+      }
+      else {
+          tipso_bubble.find(".tipso_arrow").show();
+      }
+
       if (obj.mode == 'hide') {
         if ($.isFunction(obj.settings.onBeforeShow)) {
-          obj.settings.onBeforeShow($(this));
+          obj.settings.onBeforeShow(this.element, $(this));
         }
         if (obj.settings.size) {
             tipso_bubble.addClass(obj.settings.size);

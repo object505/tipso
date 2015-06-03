@@ -79,8 +79,9 @@
 			jQuery('.beforeShow').tipso({
 				background: 'tomato',
 				useTitle: false,
-				onBeforeShow : function(){
-					console.log('This is onBeforeShow');
+				onBeforeShow : function(element, tips){
+					element.tipso('update', 'content', 'the title is a random number');
+					element.tipso('update', 'titleContent', Math.random());
 				}
 			});
 			jQuery('.beforeShow-tipso').on('click', function(e){
@@ -129,7 +130,7 @@
 				background: '#55b555',
 				color: '#eee',
 				useTitle: false,
-				size: 'small',
+				size: 'default',
 				content: 'fh fjsdkfjs fjdlskfj  glkhdfkhg ghdfgkjhk dsjkfhskjdhfsfdslkfjsdlkfjsldkf fjsdlkj'
 			});
 			// Animate Tipso
