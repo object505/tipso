@@ -401,6 +401,58 @@
           tipso_bubble.addClass('top');
         }
         break;
+      case 'top-left':
+        pos_left = $e.offset().left - (realHeight(tipso_bubble).width);
+        pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
+        tipso_bubble.find('.tipso_arrow').css({
+          marginLeft: -8,
+          marginTop: '',
+        });
+        if (pos_top < $win.scrollTop()) {
+          pos_top = $e.offset().top + $e.outerHeight() + arrow;
+
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-bottom-color': arrow_color,
+            'border-top-color': 'transparent',
+            'border-left-color': 'transparent',
+            'border-right-color': 'transparent'
+          });
+
+          /*
+           * Hide and show the appropriate rounded corners
+           */
+          tipso_bubble.removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
+          tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
+          tipso_bubble.addClass("bottom_right_corner");
+          tipso_bubble.find(".tipso_title").addClass("bottom_left_corner");
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-right-color': arrow_color,
+          });
+
+          tipso_bubble.removeClass('top-right top bottom left right');
+          tipso_bubble.addClass('bottom');
+        } else {
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-top-color': obj.settings.background,
+            'border-bottom-color': 'transparent ',
+            'border-left-color': 'transparent',
+            'border-right-color': 'transparent'
+          });
+
+          /*
+           * Hide and show the appropriate rounded corners
+           */
+          tipso_bubble.removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
+          tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
+          tipso_bubble.addClass("top_left_corner");
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-right-color': obj.settings.background,
+          });
+
+          tipso_bubble.removeClass('top bottom left right');
+          tipso_bubble.addClass('top');
+        }
+        break;
       case 'top':
         pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
         pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
@@ -522,6 +574,14 @@
         'margin-left': -1 * obj.settings.width / 2
       });
     }
+    if (obj.settings.position == 'top-left') {
+      var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
+      var tipso_arrow_width = parseInt(tipso_arrow.css("border-width").replace("px", ""));
+      tipso_arrow.css({
+        //MOA:For tomorrow
+        'margin-left': obj.settings.width / 2 + tipso_arrow_width
+      });
+    }
     if (pos_left < $win.scrollLeft() && (obj.settings.position == 'bottom' ||
       obj.settings.position == 'top')) {
       tipso_bubble.find('.tipso_arrow').css({
@@ -609,8 +669,8 @@
         /*
          * Hide and show the appropriate rounded corners
          */
-        tipso_bubble.removeClass("top_right_corner bottom_right_corner");
-        tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner");
+        tipso_bubble.removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
+        tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
 
         tipso_bubble.removeClass('top bottom left right');
         tipso_bubble.addClass('top');

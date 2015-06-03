@@ -88,3 +88,11 @@
 .tipso_bubble .bottom_right_corner, .tipso_bubble.bottom_right_corner  {
 	border-top-left-radius: 0;
 }
+
+.tipso_bubble .top_left_corner, .tipso_bubble.top_left_corner {
+	border-bottom-right-radius: 0;
+}
+
+.tipso_bubble .bottom_left_corner, .tipso_bubble.bottom_left_corner  {
+	border-top-right-radius: 0;
+}
