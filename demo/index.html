@@ -76,6 +76,15 @@
 				tooltipHover: true
 			});
 
+			jQuery('.bottom-right').tipso({
+				position: 'bottom-right',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
 			// Use Title For Tipso Content
 			jQuery('.title-tipso').tipso({useTitle: true});
 			// Tipso for Image
@@ -199,7 +208,7 @@
 		jQuery(window).load(function(){
 			// Show Tipso on Load
 			jQuery('.page-load').tipso('show');
-			jQuery('.top-right').tipso('show');
+			jQuery('.bottom-right').tipso('show');
 		});
 	</script>
 
@@ -298,6 +307,7 @@
 					<h4>Corner positions</h4>
 					<p>Lorem ipsum dolor sit <span class="top-right" title="tipso" data-tipso="This is a top-right TIPSO!">top-right</span></p>
 					<p>Lorem ipsum dolor sit <span class="top-left" title="tipso" data-tipso="This is a top-left TIPSO!">top-left</span></p>
+					<p>Lorem ipsum dolor sit <span class="bottom-right" title="tipso" data-tipso="This is a bottom-right TIPSO!">bottom-right</span></p>
 				</div>
 			</div>
 

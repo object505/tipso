@@ -171,6 +171,11 @@
         $win.resize(function tipsoResizeHandler () {
             reposition(obj);
         });
+
+        $win.scroll(function tipsoResizeHandler () {
+            reposition(obj);
+        });
+
         obj.timeout = window.setTimeout(function() {
           if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
             tipso_bubble.appendTo('body').stop(true, true).fadeIn(obj.settings
@@ -467,6 +472,67 @@
           tipso_bubble.addClass('top');
         }
         break;
+
+      /*
+       * Bottom right position
+       */
+      case 'bottom-right':
+       pos_left = $e.offset().left + ($e.outerWidth());
+       pos_top = $e.offset().top + $e.outerHeight() + arrow;
+       tipso_bubble.find('.tipso_arrow').css({
+         marginLeft: -obj.settings.arrowWidth,
+         marginTop: '',
+       });
+       if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight())
+       {
+         pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
+
+         tipso_bubble.find('.tipso_arrow').css({
+           'border-bottom-color': 'transparent',
+           'border-top-color': obj.settings.background,
+           'border-left-color': 'transparent',
+           'border-right-color': 'transparent'
+         });
+
+         /*
+          * Hide and show the appropriate rounded corners
+          */
+         removeCornerClasses(tipso_bubble);
+         tipso_bubble.addClass("top_right_corner");
+         tipso_bubble.find(".tipso_title").addClass("top_left_corner");
+         tipso_bubble.find('.tipso_arrow').css({
+           'border-left-color': obj.settings.background,
+         });
+
+         tipso_bubble.removeClass('top-right top bottom left right');
+         tipso_bubble.addClass('top');
+       }
+       else
+       {
+         tipso_bubble.find('.tipso_arrow').css({
+           'border-top-color': 'transparent',
+           'border-bottom-color': arrow_color,
+           'border-left-color': 'transparent',
+           'border-right-color': 'transparent'
+         });
+
+         /*
+          * Hide and show the appropriate rounded corners
+          */
+         removeCornerClasses(tipso_bubble);
+         tipso_bubble.addClass("bottom_right_corner");
+         tipso_bubble.find(".tipso_title").addClass("bottom_right_corner");
+         tipso_bubble.find('.tipso_arrow').css({
+           'border-left-color': arrow_color,
+         });
+
+         tipso_bubble.removeClass('top bottom left right');
+         tipso_bubble.addClass('bottom');
+       }
+       break;
+      /*
+       * Top position
+       */
       case 'top':
         pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
         pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
@@ -595,7 +661,7 @@
         break;
     }
     /*
-     * Set the position of the arrow for top-right and top-left
+     * Set the position of the arrow for the corner positions
      */
     if (obj.settings.position == 'top-right')
     {
@@ -606,9 +672,17 @@
     if (obj.settings.position == 'top-left')
     {
       var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
+      tipso_arrow.css({
+        'margin-left': obj.settings.width / 2 - 2 * obj.settings.arrowWidth
+      });
+    }
+    if (obj.settings.position == 'bottom-right')
+    {
+      var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
       var tipso_arrow_width = obj.settings.arrowWidth;
       tipso_arrow.css({
-        'margin-left': obj.settings.width / 2 - 2 * tipso_arrow_width
+        'margin-left': -obj.settings.width / 2,
+        'margin-top': ''
       });
     }
 
@@ -628,7 +702,12 @@
       });
       pos_left = pos_left + diff;
     }
-    if (pos_left < $win.scrollLeft() && (obj.settings.position == 'left' || obj.settings.position == 'right' || obj.settings.position == 'top-right' || obj.settings.position == 'top-left'))
+    if (pos_left < $win.scrollLeft() &&
+       (obj.settings.position == 'left'
+       || obj.settings.position == 'right'
+       || obj.settings.position == 'top-right'
+       || obj.settings.position == 'top-left'
+       || obj.settings.position == 'bottom-right'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
@@ -678,11 +757,16 @@
         pos_left = 0;
       }
     }
+
+    /*
+     * If out of bounds from the right hand side
+     */
     if (pos_left + obj.settings.width > $win.outerWidth() &&
        (obj.settings.position == 'left'
        || obj.settings.position == 'right'
        || obj.settings.position == 'top-right'
-       || obj.settings.position == 'top-left'))
+       || obj.settings.position == 'top-left'
+       || obj.settings.position == 'bottom-right'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
@@ -717,7 +801,6 @@
          * Hide and show the appropriate rounded corners
          */
         removeCornerClasses(tipso_bubble);
-
         tipso_bubble.removeClass('top bottom left right');
         tipso_bubble.addClass('top');
       }
