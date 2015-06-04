@@ -11,6 +11,8 @@ This fork has changed from the original TIPSO in the following ways:
 - Size option added (similar to Foundation's syntax)
 - Events send the element for easier updating
 - Show/Hide arrow option added
+- All settings are accessible from data-tipso-
+- Large tooltips with right/left positions also reposition if they don't fit
 
 ## Getting started
 

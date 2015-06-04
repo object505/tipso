@@ -39,7 +39,7 @@
       content           : null,
       ajaxContentUrl    : null,
       contentElementId  : null,         //Normally used for picking template scripts
-      useTitle          : false,         //Use the title tag as tooptip or not
+      useTitle          : false,        //Use the title tag as tooptip or not
       templateEngineFunc: null,         //A function that compiles and renders the content
       onBeforeShow      : null,
       onShow            : null,
@@ -51,15 +51,36 @@
     this.doc = $(document);
     this.win = $(window);
     this.settings = $.extend({}, defaults, options);
+
+    var data_keys = Object.keys(this.element.data());
+    var data_attrs = {};
+    for (var i = 0; i < data_keys.length; i++)
+    {
+      var key = data_keys[i].replace(pluginName, "");
+      if (key == "")
+      {
+        continue;
+      }
+      //lowercase first letter
+      key = key.charAt(0).toLowerCase() + key.slice(1);
+      data_attrs[key] = this.element.data(data_keys[i]);
+    }
+    $.extend(this.settings, data_attrs);
+
     this._defaults = defaults;
     this._name = pluginName;
     this._title = this.element.attr('title');
     this.mode = 'hide';
     this.ieFade = !supportsTransitions;
+
+    //By keeping the original prefered position and repositioning by calling
+    //the reposition function we can make for more smart and easier positioning
+    //in complex scenarios!
     this.settings.preferedPosition = this.settings.position;
 
     this.init();
   }
+
   $.extend(Plugin.prototype, {
     init: function() {
       var obj = this,
