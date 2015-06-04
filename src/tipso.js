@@ -34,6 +34,7 @@
       animationOut      : '',
       offsetX           : 0,
       offsetY           : 0,
+      arrowWidth        : 8,
       tooltipHover      : false,
       content           : null,
       ajaxContentUrl    : null,
@@ -331,7 +332,14 @@
     return false;
   })();
 
-  function reposition(thisthat) {
+  function removeCornerClasses(obj)
+  {
+    obj.removeClass("top_right_corner bottom_right_corner top_left_corner bottom_left_corner");
+    obj.find(".tipso_title").removeClass("top_right_corner bottom_right_corner top_left_corner bottom_left_corner");
+  }
+
+  function reposition(thisthat)
+  {
     var tipso_bubble = thisthat.tooltip(),
       $e = thisthat.element,
       obj = thisthat,
@@ -339,24 +347,29 @@
       arrow = 10,
       pos_top, pos_left, diff;
 
-      var arrow_color = obj.settings.background;
-      var title_content = obj.titleContent();
-      if (title_content != undefined && title_content != '') {
-          arrow_color = obj.settings.titleBackground;
-      }
+    var arrow_color = obj.settings.background;
+    var title_content = obj.titleContent();
+    if (title_content != undefined && title_content != '')
+    {
+        arrow_color = obj.settings.titleBackground;
+    }
 
-      if ( $e.parent().outerWidth() > $win.outerWidth() ){
-        $win = $e.parent();
-      }
-    switch (obj.settings.position) {
+    if ( $e.parent().outerWidth() > $win.outerWidth() )
+    {
+      $win = $e.parent();
+    }
+
+    switch (obj.settings.position)
+    {
       case 'top-right':
         pos_left = $e.offset().left + ($e.outerWidth());
         pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: -8,
+          marginLeft: -obj.settings.arrowWidth,
           marginTop: '',
         });
-        if (pos_top < $win.scrollTop()) {
+        if (pos_top < $win.scrollTop())
+        {
           pos_top = $e.offset().top + $e.outerHeight() + arrow;
 
           tipso_bubble.find('.tipso_arrow').css({
@@ -369,8 +382,7 @@
           /*
            * Hide and show the appropriate rounded corners
            */
-          tipso_bubble.removeClass("top_right_corner bottom_right_corner");
-          tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner");
+          removeCornerClasses(tipso_bubble);
           tipso_bubble.addClass("bottom_right_corner");
           tipso_bubble.find(".tipso_title").addClass("bottom_right_corner");
           tipso_bubble.find('.tipso_arrow').css({
@@ -379,7 +391,9 @@
 
           tipso_bubble.removeClass('top-right top bottom left right');
           tipso_bubble.addClass('bottom');
-        } else {
+        }
+        else
+        {
           tipso_bubble.find('.tipso_arrow').css({
             'border-top-color': obj.settings.background,
             'border-bottom-color': 'transparent ',
@@ -390,8 +404,7 @@
           /*
            * Hide and show the appropriate rounded corners
            */
-          tipso_bubble.removeClass("top_right_corner bottom_right_corner");
-          tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner");
+          removeCornerClasses(tipso_bubble);
           tipso_bubble.addClass("top_right_corner");
           tipso_bubble.find('.tipso_arrow').css({
             'border-left-color': obj.settings.background,
@@ -405,10 +418,11 @@
         pos_left = $e.offset().left - (realHeight(tipso_bubble).width);
         pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: -8,
+          marginLeft: -obj.settings.arrowWidth,
           marginTop: '',
         });
-        if (pos_top < $win.scrollTop()) {
+        if (pos_top < $win.scrollTop())
+        {
           pos_top = $e.offset().top + $e.outerHeight() + arrow;
 
           tipso_bubble.find('.tipso_arrow').css({
@@ -421,9 +435,8 @@
           /*
            * Hide and show the appropriate rounded corners
            */
-          tipso_bubble.removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
-          tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
-          tipso_bubble.addClass("bottom_right_corner");
+          removeCornerClasses(tipso_bubble);
+          tipso_bubble.addClass("bottom_left_corner");
           tipso_bubble.find(".tipso_title").addClass("bottom_left_corner");
           tipso_bubble.find('.tipso_arrow').css({
             'border-right-color': arrow_color,
@@ -431,7 +444,9 @@
 
           tipso_bubble.removeClass('top-right top bottom left right');
           tipso_bubble.addClass('bottom');
-        } else {
+        }
+        else
+        {
           tipso_bubble.find('.tipso_arrow').css({
             'border-top-color': obj.settings.background,
             'border-bottom-color': 'transparent ',
@@ -442,8 +457,7 @@
           /*
            * Hide and show the appropriate rounded corners
            */
-          tipso_bubble.removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
-          tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
+          removeCornerClasses(tipso_bubble);
           tipso_bubble.addClass("top_left_corner");
           tipso_bubble.find('.tipso_arrow').css({
             'border-right-color': obj.settings.background,
@@ -457,10 +471,11 @@
         pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
         pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: -8,
+          marginLeft: -obj.settings.arrowWidth,
           marginTop: '',
         });
-        if (pos_top < $win.scrollTop()) {
+        if (pos_top < $win.scrollTop())
+        {
           pos_top = $e.offset().top + $e.outerHeight() + arrow;
 
           tipso_bubble.find('.tipso_arrow').css({
@@ -472,7 +487,9 @@
 
           tipso_bubble.removeClass('top bottom left right');
           tipso_bubble.addClass('bottom');
-        } else {
+        }
+        else
+        {
           tipso_bubble.find('.tipso_arrow').css({
             'border-top-color': obj.settings.background,
             'border-bottom-color': 'transparent',
@@ -487,10 +504,11 @@
         pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
         pos_top = $e.offset().top + $e.outerHeight() + arrow;
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: -8,
+          marginLeft: -obj.settings.arrowWidth,
           marginTop: '',
         });
-        if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight()) {
+        if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight())
+        {
           pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
           tipso_bubble.find('.tipso_arrow').css({
             'border-top-color': obj.settings.background,
@@ -500,7 +518,9 @@
           });
           tipso_bubble.removeClass('top bottom left right');
           tipso_bubble.addClass('top');
-        } else {
+        }
+        else
+        {
           tipso_bubble.find('.tipso_arrow').css({
             'border-bottom-color': arrow_color,
             'border-top-color': 'transparent',
@@ -515,10 +535,11 @@
         pos_left = $e.offset().left - realHeight(tipso_bubble).width - arrow;
         pos_top = $e.offset().top + ($e.outerHeight() / 2) - (realHeight(tipso_bubble).height / 2);
         tipso_bubble.find('.tipso_arrow').css({
-          marginTop: -8,
+          marginTop: -obj.settings.arrowWidth,
           marginLeft: ''
         });
-        if (pos_left < $win.scrollLeft()) {
+        if (pos_left < $win.scrollLeft())
+        {
           pos_left = $e.offset().left + $e.outerWidth() + arrow;
           tipso_bubble.find('.tipso_arrow').css({
             'border-right-color': obj.settings.background,
@@ -528,7 +549,9 @@
           });
           tipso_bubble.removeClass('top bottom left right');
           tipso_bubble.addClass('right');
-        } else {
+        }
+        else
+        {
           tipso_bubble.find('.tipso_arrow').css({
             'border-left-color': obj.settings.background,
             'border-right-color': 'transparent',
@@ -543,11 +566,11 @@
         pos_left = $e.offset().left + $e.outerWidth() + arrow;
         pos_top = $e.offset().top + ($e.outerHeight() / 2) - (realHeight(tipso_bubble).height / 2);
         tipso_bubble.find('.tipso_arrow').css({
-          marginTop: -8,
+          marginTop: -obj.settings.arrowWidth,
           marginLeft: ''
         });
-        if (pos_left + arrow + obj.settings.width > $win.scrollLeft() +
-          $win.outerWidth()) {
+        if (pos_left + arrow + obj.settings.width > $win.scrollLeft() + $win.outerWidth())
+        {
           pos_left = $e.offset().left - realHeight(tipso_bubble).width - arrow;
           tipso_bubble.find('.tipso_arrow').css({
             'border-left-color': obj.settings.background,
@@ -557,7 +580,9 @@
           });
           tipso_bubble.removeClass('top bottom left right');
           tipso_bubble.addClass('left');
-        } else {
+        }
+        else
+        {
           tipso_bubble.find('.tipso_arrow').css({
             'border-right-color': obj.settings.background,
             'border-left-color': 'transparent',
@@ -569,44 +594,50 @@
         }
         break;
     }
-    if (obj.settings.position == 'top-right') {
+    /*
+     * Set the position of the arrow for top-right and top-left
+     */
+    if (obj.settings.position == 'top-right')
+    {
       tipso_bubble.find('.tipso_arrow').css({
-        'margin-left': -1 * obj.settings.width / 2
+        'margin-left': -obj.settings.width / 2
       });
     }
-    if (obj.settings.position == 'top-left') {
+    if (obj.settings.position == 'top-left')
+    {
       var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
-      var tipso_arrow_width = parseInt(tipso_arrow.css("border-width").replace("px", ""));
+      var tipso_arrow_width = obj.settings.arrowWidth;
       tipso_arrow.css({
-        //MOA:For tomorrow
-        'margin-left': obj.settings.width / 2 + tipso_arrow_width
+        'margin-left': obj.settings.width / 2 - 2 * tipso_arrow_width
       });
     }
-    if (pos_left < $win.scrollLeft() && (obj.settings.position == 'bottom' ||
-      obj.settings.position == 'top')) {
+
+    if (pos_left < $win.scrollLeft() && (obj.settings.position == 'bottom' || obj.settings.position == 'top'))
+    {
       tipso_bubble.find('.tipso_arrow').css({
-        marginLeft: pos_left - 8
+        marginLeft: pos_left - obj.settings.arrowWidth
       });
       pos_left = 0;
     }
-    if (pos_left + obj.settings.width > $win.outerWidth() && (obj.settings.position ==
-      'bottom' || obj.settings.position == 'top')) {
+    if (pos_left + obj.settings.width > $win.outerWidth() && (obj.settings.position == 'bottom' || obj.settings.position == 'top'))
+    {
       diff = $win.outerWidth() - (pos_left + obj.settings.width);
       tipso_bubble.find('.tipso_arrow').css({
-        marginLeft: -diff - 8,
+        marginLeft: -diff - obj.settings.arrowWidth,
         marginTop: ''
       });
       pos_left = pos_left + diff;
     }
-    if (pos_left < $win.scrollLeft() && (obj.settings.position == 'left' ||
-      obj.settings.position == 'right')) {
+    if (pos_left < $win.scrollLeft() && (obj.settings.position == 'left' || obj.settings.position == 'right' || obj.settings.position == 'top-right' || obj.settings.position == 'top-left'))
+    {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
-        marginLeft: -8,
+        marginLeft: -obj.settings.arrowWidth,
         marginTop: ''
       });
       pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
-      if (pos_top < $win.scrollTop()) {
+      if (pos_top < $win.scrollTop())
+      {
         pos_top = $e.offset().top + $e.outerHeight() + arrow;
         tipso_bubble.find('.tipso_arrow').css({
           'border-bottom-color': arrow_color,
@@ -615,8 +646,11 @@
           'border-right-color': 'transparent'
         });
         tipso_bubble.removeClass('top bottom left right');
+        removeCornerClasses(tipso_bubble);
         tipso_bubble.addClass('bottom');
-      } else {
+      }
+      else
+      {
         tipso_bubble.find('.tipso_arrow').css({
           'border-top-color': obj.settings.background,
           'border-bottom-color': 'transparent',
@@ -624,31 +658,40 @@
           'border-right-color': 'transparent'
         });
         tipso_bubble.removeClass('top bottom left right');
+        removeCornerClasses(tipso_bubble);
         tipso_bubble.addClass('top');
       }
-      if (pos_left + obj.settings.width > $win.outerWidth()) {
+      if (pos_left + obj.settings.width > $win.outerWidth())
+      {
         diff = $win.outerWidth() - (pos_left + obj.settings.width);
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: -diff - 8,
+          marginLeft: -diff - obj.settings.arrowWidth,
           marginTop: ''
         });
         pos_left = pos_left + diff;
       }
-      if (pos_left < $win.scrollLeft()) {
+      if (pos_left < $win.scrollLeft())
+      {
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: pos_left - 8
+          marginLeft: pos_left - obj.settings.arrowWidth
         });
         pos_left = 0;
       }
     }
-    if (pos_left + obj.settings.width > $win.outerWidth() && (obj.settings.position == 'left' || obj.settings.position == 'right' || obj.settings.position == 'top-right')) {
+    if (pos_left + obj.settings.width > $win.outerWidth() &&
+       (obj.settings.position == 'left'
+       || obj.settings.position == 'right'
+       || obj.settings.position == 'top-right'
+       || obj.settings.position == 'top-left'))
+    {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
-        marginLeft: -8,
+        marginLeft: -obj.settings.arrowWidth,
         marginTop: ''
       });
       pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
-      if (pos_top < $win.scrollTop()) {
+      if (pos_top < $win.scrollTop())
+      {
         pos_top = $e.offset().top + $e.outerHeight() + arrow;
         tipso_bubble.find('.tipso_arrow').css({
           'border-bottom-color': arrow_color,
@@ -656,9 +699,13 @@
           'border-left-color': 'transparent',
           'border-right-color': 'transparent'
         });
+
+        removeCornerClasses(tipso_bubble);
         tipso_bubble.removeClass('top bottom left right');
         tipso_bubble.addClass('bottom');
-      } else {
+      }
+      else
+      {
         tipso_bubble.find('.tipso_arrow').css({
           'border-top-color': obj.settings.background,
           'border-bottom-color': 'transparent',
@@ -669,23 +716,24 @@
         /*
          * Hide and show the appropriate rounded corners
          */
-        tipso_bubble.removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
-        tipso_bubble.find(".tipso_title").removeClass("top_right_corner bottom_right_corner top_left_corner top_right_corner");
+        removeCornerClasses(tipso_bubble);
 
         tipso_bubble.removeClass('top bottom left right');
         tipso_bubble.addClass('top');
       }
-      if (pos_left + obj.settings.width > $win.outerWidth()) {
+      if (pos_left + obj.settings.width > $win.outerWidth())
+      {
         diff = $win.outerWidth() - (pos_left + obj.settings.width);
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: -diff - 8,
+          marginLeft: -diff - obj.settings.arrowWidth,
           marginTop: ''
         });
         pos_left = pos_left + diff;
       }
-      if (pos_left < $win.scrollLeft()) {
+      if (pos_left < $win.scrollLeft())
+      {
         tipso_bubble.find('.tipso_arrow').css({
-          marginLeft: pos_left - 8
+          marginLeft: pos_left - obj.settings.arrowWidth
         });
         pos_left = 0;
       }
