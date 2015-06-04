@@ -6,6 +6,7 @@ A Lightweight Responsive jQuery Tooltip Plugin (Forked from https://github.com/o
 This fork has changed from the original TIPSO in the following ways:
 
 - Template engine support added
+- Corner positions support added
 - Title bar added
 - Size option added (similar to Foundation's syntax)
 - Events send the element for easier updating

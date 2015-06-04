@@ -56,6 +56,7 @@
     this._title = this.element.attr('title');
     this.mode = 'hide';
     this.ieFade = !supportsTransitions;
+    this.settings.preferedPosition = this.settings.position;
 
     this.init();
   }
@@ -169,6 +170,7 @@
         tipso_bubble.find('.tipso_title').html(obj.titleContent());
         reposition(obj);
         $win.resize(function tipsoResizeHandler () {
+            obj.settings.position = obj.settings.preferedPosition;
             reposition(obj);
         });
 
@@ -749,6 +751,9 @@
       });
     }
 
+    /*
+     * Check out of boundness
+     */
     if (pos_left < $win.scrollLeft() && (obj.settings.position == 'bottom' || obj.settings.position == 'top'))
     {
       tipso_bubble.find('.tipso_arrow').css({
@@ -890,6 +895,22 @@
       left: pos_left + obj.settings.offsetX,
       top: pos_top + obj.settings.offsetY
     });
+
+    // If positioned right or left and tooltip is out of bounds change position
+    // This position change will be temporary, because preferedPosition is there
+    // to help!!
+    if (pos_top < $win.scrollTop() && (obj.settings.position == 'right' || obj.settings.position == 'left'))
+    {
+      $e.tipso('update', 'position', 'bottom');
+      reposition(obj);
+    }
+    if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight()
+        && (obj.settings.position == 'right' || obj.settings.position == 'left'))
+    {
+      $e.tipso('update', 'position', 'top');
+      reposition(obj);
+    }
+
   }
   $[pluginName] = $.fn[pluginName] = function(options) {
     var args = arguments;
