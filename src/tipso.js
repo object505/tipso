@@ -172,10 +172,6 @@
             reposition(obj);
         });
 
-        $win.scroll(function tipsoResizeHandler () {
-            reposition(obj);
-        });
-
         obj.timeout = window.setTimeout(function() {
           if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
             tipso_bubble.appendTo('body').stop(true, true).fadeIn(obj.settings
