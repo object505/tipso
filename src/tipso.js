@@ -530,6 +530,64 @@
          tipso_bubble.addClass('bottom');
        }
        break;
+
+       /*
+        * Bottom left position
+        */
+       case 'bottom-left':
+        pos_left = $e.offset().left - (realHeight(tipso_bubble).width);
+        pos_top = $e.offset().top + $e.outerHeight() + arrow;
+        tipso_bubble.find('.tipso_arrow').css({
+          marginLeft: -obj.settings.arrowWidth,
+          marginTop: '',
+        });
+        if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight())
+        {
+          pos_top = $e.offset().top - realHeight(tipso_bubble).height - arrow;
+
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-bottom-color': 'transparent',
+            'border-top-color': obj.settings.background,
+            'border-left-color': 'transparent',
+            'border-right-color': 'transparent'
+          });
+
+          /*
+           * Hide and show the appropriate rounded corners
+           */
+          removeCornerClasses(tipso_bubble);
+          tipso_bubble.addClass("top_left_corner");
+          tipso_bubble.find(".tipso_title").addClass("top_left_corner");
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-right-color': obj.settings.background,
+          });
+
+          tipso_bubble.removeClass('top-right top bottom left right');
+          tipso_bubble.addClass('top');
+        }
+        else
+        {
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-top-color': 'transparent',
+            'border-bottom-color': arrow_color,
+            'border-left-color': 'transparent',
+            'border-right-color': 'transparent'
+          });
+
+          /*
+           * Hide and show the appropriate rounded corners
+           */
+          removeCornerClasses(tipso_bubble);
+          tipso_bubble.addClass("bottom_left_corner");
+          tipso_bubble.find(".tipso_title").addClass("bottom_left_corner");
+          tipso_bubble.find('.tipso_arrow').css({
+            'border-right-color': arrow_color,
+          });
+
+          tipso_bubble.removeClass('top bottom left right');
+          tipso_bubble.addClass('bottom');
+        }
+        break;
       /*
        * Top position
        */
@@ -685,6 +743,15 @@
         'margin-top': ''
       });
     }
+    if (obj.settings.position == 'bottom-left')
+    {
+      var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
+      var tipso_arrow_width = obj.settings.arrowWidth;
+      tipso_arrow.css({
+        'margin-left': obj.settings.width / 2 - 2 * obj.settings.arrowWidth,
+        'margin-top': ''
+      });
+    }
 
     if (pos_left < $win.scrollLeft() && (obj.settings.position == 'bottom' || obj.settings.position == 'top'))
     {
@@ -707,7 +774,8 @@
        || obj.settings.position == 'right'
        || obj.settings.position == 'top-right'
        || obj.settings.position == 'top-left'
-       || obj.settings.position == 'bottom-right'))
+       || obj.settings.position == 'bottom-right'
+       || obj.settings.position == 'bottom-left'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
@@ -766,6 +834,7 @@
        || obj.settings.position == 'right'
        || obj.settings.position == 'top-right'
        || obj.settings.position == 'top-left'
+       || obj.settings.position == 'bottom-right'
        || obj.settings.position == 'bottom-right'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);

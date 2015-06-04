@@ -85,6 +85,15 @@
 				tooltipHover: true
 			});
 
+			jQuery('.bottom-left').tipso({
+				position: 'bottom-left',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
 			// Use Title For Tipso Content
 			jQuery('.title-tipso').tipso({useTitle: true});
 			// Tipso for Image
@@ -208,7 +217,7 @@
 		jQuery(window).load(function(){
 			// Show Tipso on Load
 			jQuery('.page-load').tipso('show');
-			jQuery('.bottom-right').tipso('show');
+			jQuery('.bottom-left').tipso('show');
 		});
 	</script>
 
@@ -308,6 +317,7 @@
 					<p>Lorem ipsum dolor sit <span class="top-right" title="tipso" data-tipso="This is a top-right TIPSO!">top-right</span></p>
 					<p>Lorem ipsum dolor sit <span class="top-left" title="tipso" data-tipso="This is a top-left TIPSO!">top-left</span></p>
 					<p>Lorem ipsum dolor sit <span class="bottom-right" title="tipso" data-tipso="This is a bottom-right TIPSO!">bottom-right</span></p>
+					<p>Lorem ipsum dolor sit <span class="bottom-left" title="tipso" data-tipso="This is a bottom-left TIPSO!">bottom-left</span></p>
 				</div>
 			</div>
 
@@ -315,7 +325,7 @@
 				<div class="c6">
 					<h4>Title bar</h4>
 					<p>Some <span class="top" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">content</span></p>
-					<p>Title bar <span class="bottom" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">automatic color</span></p>
+					<p>Title bar <span class="bottom" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">automatic arrow color</span></p>
 				</div>
 				<div class="c6">
 					<pre><span>Code Example</span>
