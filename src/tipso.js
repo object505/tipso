@@ -64,8 +64,22 @@
       //lowercase first letter
       key = key.charAt(0).toLowerCase() + key.slice(1);
       data_attrs[key] = this.element.data(data_keys[i]);
+
+      //We cannot use extend for data_attrs because they are automatically
+      //lowercased. We need to do this manually and extend this.settings with
+      //data_attrs
+      for (settings_key in this.settings)
+      {
+        if (settings_key.toLowerCase() == key)
+        {
+          this.settings[settings_key] = data_attrs[key];
+        }
+      }
+      if (key == "tooltiphover")
+      {
+        console.log(this.settings);
+      }
     }
-    $.extend(this.settings, data_attrs);
 
     this._defaults = defaults;
     this._name = pluginName;
@@ -756,7 +770,6 @@
     if (obj.settings.position === 'bottom-right')
     {
       var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
-      var tipso_arrow_width = obj.settings.arrowWidth;
       tipso_arrow.css({
         'margin-left': -obj.settings.width / 2,
         'margin-top': ''
@@ -765,7 +778,6 @@
     if (obj.settings.position === 'bottom-left')
     {
       var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
-      var tipso_arrow_width = obj.settings.arrowWidth;
       tipso_arrow.css({
         'margin-left': obj.settings.width / 2 - 2 * obj.settings.arrowWidth,
         'margin-top': ''
