@@ -308,7 +308,7 @@
           content = $e.data('tipso');
         }
       }
-      if (typeof(obj.settings.templateEngineFunc) !== undefined) {
+      if (obj.settings.templateEngineFunc !== null) {
           content = obj.settings.templateEngineFunc(content);
       }
       return content;
