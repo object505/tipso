@@ -24,6 +24,7 @@
       background        : '#55b555',
       titleBackground   : '#333333',
       color             : '#ffffff',
+      titleColor        : '#ffffff',
       titleContent      : '',           //Content of the title bar
       showArrow         : true,
       position          : 'top',
@@ -51,6 +52,16 @@
     this.doc = $(document);
     this.win = $(window);
     this.settings = $.extend({}, defaults, options);
+
+    /*
+     * Process and add data-attrs to settings as well for ease of use. Also, if
+     * data-tipso is an object then use it as extra settings and if it's not
+     * then use it as a title.
+     */
+    if (typeof(this.element.data("tipso")) === "object")
+    {
+      $.extend(this.settings, this.element.data("tipso"));
+    }
 
     var data_keys = Object.keys(this.element.data());
     var data_attrs = {};
@@ -200,6 +211,7 @@
         }
         tipso_bubble.find('.tipso_title').css({
             background: obj.settings.titleBackground,
+            color: obj.settings.titleColor
         });
         tipso_bubble.find('.tipso_content').html(obj.content());
         tipso_bubble.find('.tipso_title').html(obj.titleContent());
@@ -301,28 +313,39 @@
         $e = this.element,
         obj = this,
         title = this._title;
-      if (obj.settings.ajaxContentUrl) {
+      if (obj.settings.ajaxContentUrl)
+      {
         content = $.ajax({
           type: "GET",
           url: obj.settings.ajaxContentUrl,
           async: false
         }).responseText;
       }
-      else if (obj.settings.contentElementId) {
+      else if (obj.settings.contentElementId)
+      {
         content = $("#" + obj.settings.contentElementId).text();
       }
-      else if (obj.settings.content) {
+      else if (obj.settings.content)
+      {
         content = obj.settings.content;
       }
-      else {
-        if (obj.settings.useTitle === true) {
+      else
+      {
+        if (obj.settings.useTitle === true)
+        {
           content = title;
         }
-        else {
-          content = $e.data('tipso');
+        else
+        {
+          // Only use data-tipso as content if it's not being used for settings
+          if (typeof($e.data("tipso")) === "string")
+          {
+            content = $e.data('tipso');
+          }
         }
       }
-      if (obj.settings.templateEngineFunc !== null) {
+      if (obj.settings.templateEngineFunc !== null)
+      {
           content = obj.settings.templateEngineFunc(content);
       }
       return content;
