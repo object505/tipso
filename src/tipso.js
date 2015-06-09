@@ -79,7 +79,7 @@
       //We cannot use extend for data_attrs because they are automatically
       //lowercased. We need to do this manually and extend this.settings with
       //data_attrs
-      for (settings_key in this.settings)
+      for (var settings_key in this.settings)
       {
         if (settings_key.toLowerCase() == key)
         {
@@ -300,11 +300,13 @@
         var content,
           $e = this.element,
           obj = this;
-        if (obj.settings.titleContent) {
+        if (obj.settings.titleContent)
+        {
             content = obj.settings.titleContent;
         }
-        else {
-            content = $e.data('tipso-title')
+        else
+        {
+            content = $e.data('tipso-title');
         }
         return content;
     },
@@ -827,12 +829,12 @@
       pos_left = pos_left + diff;
     }
     if (pos_left < $win.scrollLeft() &&
-       (obj.settings.position === 'left'
-       || obj.settings.position === 'right'
-       || obj.settings.position === 'top-right'
-       || obj.settings.position === 'top-left'
-       || obj.settings.position === 'bottom-right'
-       || obj.settings.position === 'bottom-left'))
+       (obj.settings.position === 'left' ||
+        obj.settings.position === 'right' ||
+        obj.settings.position === 'top-right' ||
+        obj.settings.position === 'top-left' ||
+        obj.settings.position === 'bottom-right' ||
+        obj.settings.position === 'bottom-left'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
@@ -887,12 +889,12 @@
      * If out of bounds from the right hand side
      */
     if (pos_left + obj.settings.width > $win.outerWidth() &&
-       (obj.settings.position === 'left'
-       || obj.settings.position === 'right'
-       || obj.settings.position === 'top-right'
-       || obj.settings.position === 'top-left'
-       || obj.settings.position === 'bottom-right'
-       || obj.settings.position === 'bottom-right'))
+       (obj.settings.position === 'left' ||
+        obj.settings.position === 'right' ||
+        obj.settings.position === 'top-right' ||
+        obj.settings.position === 'top-left' ||
+        obj.settings.position === 'bottom-right' ||
+        obj.settings.position === 'bottom-right'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
@@ -960,8 +962,8 @@
       $e.tipso('update', 'position', 'bottom');
       reposition(obj);
     }
-    if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight()
-        && (obj.settings.position === 'right' || obj.settings.position === 'left'))
+    if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight() &&
+        (obj.settings.position === 'right' || obj.settings.position === 'left'))
     {
       $e.tipso('update', 'position', 'top');
       reposition(obj);
