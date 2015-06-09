@@ -57,7 +57,7 @@
     for (var i = 0; i < data_keys.length; i++)
     {
       var key = data_keys[i].replace(pluginName, "");
-      if (key == "")
+      if (key === "")
       {
         continue;
       }
@@ -89,11 +89,11 @@
       $e.addClass('tipso_style').removeAttr('title');
       if (isTouchSupported()) {
         $e.on('click' + '.' + pluginName, function(e) {
-          obj.mode == 'hide' ? obj.show() : obj.hide();
+          obj.mode === 'hide' ? obj.show() : obj.hide();
           e.stopPropagation();
         });
         $doc.on('click', function closeTipso () {
-          if (obj.mode == 'show') {
+          if (obj.mode === 'show') {
             obj.hide();
           }
         });
@@ -151,14 +151,14 @@
         obj = this,
         $win = this.win;
 
-      if (obj.settings.showArrow == false) {
+      if (obj.settings.showArrow === false) {
           tipso_bubble.find(".tipso_arrow").hide();
       }
       else {
           tipso_bubble.find(".tipso_arrow").show();
       }
 
-      if (obj.mode == 'hide') {
+      if (obj.mode === 'hide') {
         if ($.isFunction(obj.settings.onBeforeShow)) {
           obj.settings.onBeforeShow(this.element, this);
         }
@@ -231,12 +231,12 @@
 
       window.clearTimeout(obj.timeout);
       obj.timeout = null;
-      if (obj.mode != 'tooltipHover') {
+      if (obj.mode !== 'tooltipHover') {
         if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
           tipso_bubble.stop(true, true).fadeOut(obj.settings.speed,
           function() {
             $(this).remove();
-            if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
+            if ($.isFunction(obj.settings.onHide) && obj.mode === 'show') {
               obj.settings.onHide(this.element, this);
             }
             obj.mode = 'hide';
@@ -249,7 +249,7 @@
           .addClass('animated ' + obj.settings.animationOut)
           .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
             $(this).removeClass('animated ' + obj.settings.animationOut).remove();
-            if ($.isFunction(obj.settings.onHide) && obj.mode == 'show') {
+            if ($.isFunction(obj.settings.onHide) && obj.mode === 'show') {
               obj.settings.onHide(this.element, this);
             }
             obj.mode = 'hide';
@@ -308,7 +308,7 @@
           content = $e.data('tipso');
         }
       }
-      if (obj.settings.templateEngineFunc != null) {
+      if (typeof(obj.settings.templateEngineFunc) !== undefined) {
           content = obj.settings.templateEngineFunc(content);
       }
       return content;
@@ -349,7 +349,7 @@
   var supportsTransitions = (function() {
     var s = document.createElement('p').style,
         v = ['ms','O','Moz','Webkit'];
-    if( s['transition'] == '' ) return true;
+    if( s['transition'] === '' ) return true;
     while( v.length )
         if( v.pop() + 'Transition' in s )
             return true;
@@ -373,7 +373,7 @@
 
     var arrow_color = obj.settings.background;
     var title_content = obj.titleContent();
-    if (title_content != undefined && title_content != '')
+    if (title_content !== undefined && title_content !== '')
     {
         arrow_color = obj.settings.titleBackground;
     }
@@ -740,20 +740,20 @@
     /*
      * Set the position of the arrow for the corner positions
      */
-    if (obj.settings.position == 'top-right')
+    if (obj.settings.position === 'top-right')
     {
       tipso_bubble.find('.tipso_arrow').css({
         'margin-left': -obj.settings.width / 2
       });
     }
-    if (obj.settings.position == 'top-left')
+    if (obj.settings.position === 'top-left')
     {
       var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
       tipso_arrow.css({
         'margin-left': obj.settings.width / 2 - 2 * obj.settings.arrowWidth
       });
     }
-    if (obj.settings.position == 'bottom-right')
+    if (obj.settings.position === 'bottom-right')
     {
       var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
       var tipso_arrow_width = obj.settings.arrowWidth;
@@ -762,7 +762,7 @@
         'margin-top': ''
       });
     }
-    if (obj.settings.position == 'bottom-left')
+    if (obj.settings.position === 'bottom-left')
     {
       var tipso_arrow = tipso_bubble.find(".tipso_arrow").eq(0);
       var tipso_arrow_width = obj.settings.arrowWidth;
@@ -775,14 +775,14 @@
     /*
      * Check out of boundness
      */
-    if (pos_left < $win.scrollLeft() && (obj.settings.position == 'bottom' || obj.settings.position == 'top'))
+    if (pos_left < $win.scrollLeft() && (obj.settings.position === 'bottom' || obj.settings.position === 'top'))
     {
       tipso_bubble.find('.tipso_arrow').css({
         marginLeft: pos_left - obj.settings.arrowWidth
       });
       pos_left = 0;
     }
-    if (pos_left + obj.settings.width > $win.outerWidth() && (obj.settings.position == 'bottom' || obj.settings.position == 'top'))
+    if (pos_left + obj.settings.width > $win.outerWidth() && (obj.settings.position === 'bottom' || obj.settings.position === 'top'))
     {
       diff = $win.outerWidth() - (pos_left + obj.settings.width);
       tipso_bubble.find('.tipso_arrow').css({
@@ -792,12 +792,12 @@
       pos_left = pos_left + diff;
     }
     if (pos_left < $win.scrollLeft() &&
-       (obj.settings.position == 'left'
-       || obj.settings.position == 'right'
-       || obj.settings.position == 'top-right'
-       || obj.settings.position == 'top-left'
-       || obj.settings.position == 'bottom-right'
-       || obj.settings.position == 'bottom-left'))
+       (obj.settings.position === 'left'
+       || obj.settings.position === 'right'
+       || obj.settings.position === 'top-right'
+       || obj.settings.position === 'top-left'
+       || obj.settings.position === 'bottom-right'
+       || obj.settings.position === 'bottom-left'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
@@ -852,12 +852,12 @@
      * If out of bounds from the right hand side
      */
     if (pos_left + obj.settings.width > $win.outerWidth() &&
-       (obj.settings.position == 'left'
-       || obj.settings.position == 'right'
-       || obj.settings.position == 'top-right'
-       || obj.settings.position == 'top-left'
-       || obj.settings.position == 'bottom-right'
-       || obj.settings.position == 'bottom-right'))
+       (obj.settings.position === 'left'
+       || obj.settings.position === 'right'
+       || obj.settings.position === 'top-right'
+       || obj.settings.position === 'top-left'
+       || obj.settings.position === 'bottom-right'
+       || obj.settings.position === 'bottom-right'))
     {
       pos_left = $e.offset().left + ($e.outerWidth() / 2) - (realHeight(tipso_bubble).width / 2);
       tipso_bubble.find('.tipso_arrow').css({
@@ -920,13 +920,13 @@
     // If positioned right or left and tooltip is out of bounds change position
     // This position change will be temporary, because preferedPosition is there
     // to help!!
-    if (pos_top < $win.scrollTop() && (obj.settings.position == 'right' || obj.settings.position == 'left'))
+    if (pos_top < $win.scrollTop() && (obj.settings.position === 'right' || obj.settings.position === 'left'))
     {
       $e.tipso('update', 'position', 'bottom');
       reposition(obj);
     }
     if (pos_top + realHeight(tipso_bubble).height > $win.scrollTop() + $win.outerHeight()
-        && (obj.settings.position == 'right' || obj.settings.position == 'left'))
+        && (obj.settings.position === 'right' || obj.settings.position === 'left'))
     {
       $e.tipso('update', 'position', 'top');
       reposition(obj);
