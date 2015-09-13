@@ -50,11 +50,12 @@ img{max-width:100%;height:auto;display:block;margin-left:auto;margin-right:auto}
 .end{float:right!important}
 
 /*
- * Main
+ * Main 
  */
 body{
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
+	line-height: 20px;
 	color: #555555;
 	overflow-x: hidden;
 }
@@ -63,6 +64,7 @@ h1{
 	font-size: 55px;
 	line-height: normal;
 	margin: 20px 0;
+	color: #55b555;
 }
 h1 span{
 	font-weight: 600;
@@ -70,7 +72,7 @@ h1 span{
 	font-size: 22px;
 	line-height: normal;
 	margin: 20px 0;
-	color: 'tomato';
+	color: #5bbbbb;
 }
 h3{
 	font-weight: 600;
@@ -93,9 +95,10 @@ a{
 	color: #5bbbbb;
 }
 #main{
+	padding: 55px 0;
 	overflow: hidden;
 }
-pre {
+pre {		
 	background-color: #f5f5f5;
 	padding: 20px;
 }
@@ -117,7 +120,7 @@ select{
 .demo-section{
 	margin-bottom: 30px;
 	padding-bottom: 30px;
-	border-bottom: 1px solid #f5f5f5;
+	border-bottom: 1px solid #f5f5f5;	
 }
 .demo-section h4{
 	margin: 0px 0px 30px;
@@ -134,7 +137,7 @@ select{
 .wordpress-info{
 	background: #555555;
 	color: #f5f5f5;
-	font-weight: 600;
+	font-weight: 600;	
 }
 .wordpress-info a{
 	font-size: 14px;
