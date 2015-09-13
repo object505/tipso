@@ -10,7 +10,11 @@
 	<link rel="stylesheet" href="../src/tipso.css">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../src/tipso.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" charset="utf-8"></script>
+	<script type="text/template" id="template_sample">
+		This is a test <%= name %>.
+	</script>
+	<script src="../src/tipso.js"></script>
 
 	<!--[if lt IE 9]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -22,6 +26,7 @@
 			jQuery('.right').tipso({
 				position: 'right',
 				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
 				useTitle: false,
 			});
 			jQuery('.left').tipso({
@@ -53,12 +58,49 @@
 				}
 			});
 
+			jQuery('.top-right').tipso({
+				position: 'top-right',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
+			jQuery('.top-left').tipso({
+				position: 'top-left',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
+			jQuery('.bottom-right').tipso({
+				position: 'bottom-right',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
+			jQuery('.bottom-left').tipso({
+				position: 'bottom-left',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
 			// Use Title For Tipso Content
-			jQuery('.title-tipso').tipso();
+			jQuery('.title-tipso').tipso({useTitle: true});
 			// Tipso for Image
 			jQuery('.img-tipso').tipso({
 				useTitle: false,
-				background: 'rgba(0,0,0,0.8)'
+				background: 'rgba(0,0,0,0.8)',
+				position: 'top-left'
 			});
 			// Show - Hide Tipso on Click
 			jQuery('.show-hide').tipso({
@@ -79,8 +121,9 @@
 			jQuery('.beforeShow').tipso({
 				background: 'tomato',
 				useTitle: false,
-				onBeforeShow : function(){
-					console.log('This is onBeforeShow');
+				onBeforeShow : function(element, tips){
+					element.tipso('update', 'content', 'the title is a random number');
+					element.tipso('update', 'titleContent', Math.random());
 				}
 			});
 			jQuery('.beforeShow-tipso').on('click', function(e){
@@ -124,26 +167,50 @@
 					alert('Tipso Hidden');
 				}
 			});
-			jQuery('.page-load').tipso({
-				position: 'left',
-				background: 'rgb(236,236,236)',
-				color: '#663399',
-				useTitle: false
 
+			jQuery('.template-content').tipso({
+				position: 'top',
+				background: '#55b555',
+				color: '#eee',
+				useTitle: false,
+				size: 'small',
+				contentElementId: 'template_sample',
+				templateEngineFunc: function(content){
+					var compiled = _.template(content);
+					var names = ['moa', 'sara', 'james', 'hugo', 'mehr'];
+					return compiled({name: _.sample(names)});
+				},
+				content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores velit, animi necessitatibus? Odio repudiandae vero',
+				onBeforeShow: function(ele, tipso) {
+					ele.tipso('update', 'content', '');
+				}
+			});
+
+			jQuery('.tiny').tipso({ size: 'tiny' });
+			jQuery('.small').tipso({ size: 'small' });
+			jQuery('.default').tipso({ size: 'default' });
+			jQuery('.large').tipso({ size: 'large' });
+
+			jQuery('.page-load').tipso({
+				position: 'bottom',
+				background: '#55b555',
+				color: '#eee',
+				useTitle: false,
+				content: 'This one loads on page load',
 			});
 			// Animate Tipso
 			jQuery('.animate').tipso({
 				animationIn: 'bounceIn',
 				animationOut: 'bounceOut',
-				useTitle: false
+				useTitle: false,
 			});
 			jQuery('.animationIn').on('change', function(e){
 				var $this = jQuery(this);
-				jQuery('.animate').tipso('update', 'animationIn', $this.val());				
+				jQuery('.animate').tipso('update', 'animationIn', $this.val());
 			});
 			jQuery('.animationOut').on('change', function(e){
 				var $this = jQuery(this);
-				jQuery('.animate').tipso('update', 'animationOut', $this.val());				
+				jQuery('.animate').tipso('update', 'animationOut', $this.val());
 			});
 
 		});
@@ -158,26 +225,26 @@
 	<header>
 		<div class="grid w960">
 			<div class="row">
-				<div class="c12"><h1>Tipso <span>A Lightweight Responsive jQuery Tooltip Plugin</span></h1></div>
-			</div>
-			<div class="row">
-				<div class="c12">
-					<ul class="social">
-						<li>SHARE ON</li>
-						<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftipso.object505.com%2F&t=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-						<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Ftipso.object505.com%2F&text=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin:%20http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Tweet"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-						<li><a href="https://plus.google.com/share?url=http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Share on Google+"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-					</ul>
-				</div>
+				<div class="c12"><h1>Tipso <span>(Forked version with template engine support)</span></h1></div>
 			</div>
 		</div>
 	</header>
-	<a href="https://github.com/object505/tipso"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+	<a href="https://github.com/auxiliary/tipso"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 	<div id="main">
 		<div class="grid w960">
-			<div class="row wordpress-info">
+			<div class="row">
 				<div class="c12">
-					<p>There is also a Wordpress version of this plugin. GET IT <a href="https://wordpress.org/plugins/tipso/" target="_blank">HERE</a></p>
+					<p>This fork has changed from the original <a href="https://github.com/object505/tipso">Tipso</a> in the following ways: </p>
+					<ul>
+						<li>Template engine support added</li>
+						<li>Corner positions support added</li>
+						<li>Title bar added</li>
+						<li>Size option added (similar to Foundation's syntax)</li>
+						<li>Events send the element for easier updating</li>
+						<li>All settings are accessible from data-tipso-</li>
+						<li>The data-tipso attribute itself can be used for settings as well as the content</li>
+						<li>Large tooltips with right/left positions also reposition if they don't fit</li>
+					</ul>
 				</div>
 			</div>
 			<div class="row">
@@ -206,24 +273,30 @@
 				<div class="c12">
 					<h3>Defaults</h3>
 <pre><code>jQuery(element).tipso({
-    speed           : 400,
-    background      : '#55b555',
-    color           : '#ffffff',
-    position        : 'top',
-    width           : 200,
-    maxWidth        : '',
-    delay           : 200,
-    animationIn     : 'fadeIn',
-    animationOut    : 'fadeOut',
-    offsetX         : 0,
-    offsetY         : 0,
-    tooltipHover    : false,
-    content         : null,
-    ajaxContentUrl  : null,
-    useTitle        : true,
-    onBeforeShow    : null,
-    onShow          : null,
-    onHide          : null
+	speed             : 400,          //Animation speed
+	background        : '#55b555',
+	titleBackground   : '#333333',
+	color             : '#ffffff',
+	titleColor        : '#ffffff',
+	titleContent      : '',           //Content of the title bar
+	showArrow         : true,					//Show or hide the arrow
+	position          : 'top',
+	width             : 200,
+	maxWidth          : '',
+	delay             : 200,
+	animationIn       : '',
+	animationOut      : '',
+	offsetX           : 0,
+	offsetY           : 0,
+	tooltipHover      : false,
+	content           : null,
+	ajaxContentUrl    : null,
+	contentElementId  : null,         //Normally used for picking template scripts
+	useTitle          : false,         //Use the title tag as tooptip or not
+	templateEngineFunc: null,         //A function that compiles and renders the content
+	onBeforeShow      : null,
+	onShow            : null,
+	onHide            : null
 });</code></pre>
 
 				</div>
@@ -238,9 +311,90 @@
 			<div class="row demo-section">
 				<div class="c12">
 					<h4>Position top, bottom, left and right</h4>
-					<p>Lorem ipsum dolor sit <span class="left" title="tipso" data-tipso="This is a left TIPSO!">left</span>, consectetur adipisicing elit. Minima <span class="top" title="tipso" data-tipso="This is a top TIPSO!">top</span> nostrum, quia inventore ullam consequuntur velit <span class="right" title="tipso" data-tipso="This is a right TIPSO!">right</span> fuga officiis non repellendus ea qui nihil delectus, <span class="bottom" title="tipso" data-tipso="This is a bottom TIPSO!">bottom</span> eligendi accusamus ratione odio.</p>
+					<p>Lorem ipsum dolor sit <span class="left" title="tipso" data-tipso="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta reprehenderit itaque magni, minus numquam! Sunt asperiores eligendi esse rerum harum cum voluptate reprehenderit, maiores voluptatum doloribus debitis, expedita placeat earum.">left</span>
+						, consectetur adipisicing elit. Minima <span class="top" title="tipso" data-tipso="This is a top TIPSO!">top</span> nostrum, quia inventore ullam consequuntur velit <span class="right" title="tipso" data-tipso-title="This is a title" data-tipso="This is a right TIPSO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus dolorum eum aliquam obcaecati doloremque odio at, laborum, non nobis eveniet dolor explicabo et ut facilis nam soluta libero veritatis! Id.">right</span> fuga officiis non repellendus ea qui nihil delectus, <span class="bottom" title="tipso" data-tipso="This is a bottom TIPSO!">bottom</span> eligendi accusamus ratione odio.</p>
 				</div>
+			</div>
 
+			<div class="row demo-section">
+				<div class="c12">
+					<h4>Corner positions</h4>
+					<p>Lorem ipsum dolor sit <span class="top-right" title="tipso" data-tipso="This is a top-right TIPSO!">top-right</span></p>
+					<p>Lorem ipsum dolor sit <span class="top-left" title="tipso" data-tipso="This is a top-left TIPSO!">top-left</span></p>
+					<p>Lorem ipsum dolor sit <span class="bottom-right" title="tipso" data-tipso="This is a bottom-right TIPSO!">bottom-right</span></p>
+					<p>Lorem ipsum dolor sit <span class="bottom-left" title="tipso" data-tipso="This is a bottom-left TIPSO!">bottom-left</span></p>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Title bar</h4>
+					<p>Some <span class="top" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">content</span></p>
+					<p>Title bar <span class="bottom" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">automatic arrow color</span></p>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code type="javascript">
+jQuery('.top').tipso({
+  titleContent: 'Hello'
+});
+//or use data-tipso-title
+</code>
+					</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Size option</h4>
+					<p>
+						Tiny <span class="tiny" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>,
+						Small <span class="small" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>,
+						Default <span class="default" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>,
+						Large <span class="large" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>
+					</p>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code type="javascript">
+jQuery('.top').tipso({
+  size: 'tiny'
+});
+</code>
+					</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Template engine support</h4>
+					<p>
+						The content of this <span class="template-content">tooltip</span> comes from a template engine and gets changed randomly every time.
+						This example is using Underscore.
+					</p>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code type="javascript">
+jQuery('.template-content').tipso({
+  position: 'top',
+  background: '#55b555',
+  color: '#eee',
+  useTitle: false,
+  size: 'small',
+  contentElementId: 'template_sample',
+  templateEngineFunc: function(content){
+  	var compiled = _.template(content);
+  	var names = ['moa', 'sara', 'james', 'hugo', 'mehr'];
+  	return compiled({name: _.sample(names)});
+  },
+  onBeforeShow: function(ele, tipso) {
+  	ele.tipso('update', 'content', '');
+  }
+});
+</code>
+					</pre>
+				</div>
 			</div>
 
 			<div class="row demo-section">
@@ -265,7 +419,7 @@ jQuery(window).load(function(){
 					<p>Tipso tooltip with CSS3 <span class="animate" data-tipso="CSS3 Animated TIPSO!">animation</span> effects using <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a></p>
 					<div class="row">
 						<div class="c6">
-							<p>Animation In</p> 
+							<p>Animation In</p>
 							<select class="animationIn">
 						        <optgroup label="Attention Seekers">
 						          <option value="bounce">bounce</option>
@@ -371,7 +525,7 @@ jQuery(window).load(function(){
 						      </select>
 						</div>
 						<div class="c6">
-							<p>Animation Out</p> 
+							<p>Animation Out</p>
 							<select class="animationOut">
 						        <optgroup label="Attention Seekers">
 						          <option value="bounce">bounce</option>
@@ -664,7 +818,9 @@ jQuery('.update-tipso-input').on('click', function(e){
 				<div class="c6">
 					<pre><span>Code Example</span>
 <code>
-jQuery('.title-tipso').tipso();
+jQuery('.title-tipso').tipso({
+  useTitle: true
+});
 </code>
 </pre>
 				</div>

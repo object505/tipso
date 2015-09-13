@@ -1,14 +1,19 @@
 tipso
 =====
 
-A Lightweight Responsive jQuery Tooltip Plugin
+A Lightweight Responsive jQuery Tooltip Plugin (Forked from https://github.com/object505/tipso)
 
-[![Build Status](https://travis-ci.org/object505/tipso.svg?branch=master)](https://travis-ci.org/object505/tipso)
-[![NPM version](http://img.shields.io/npm/v/tipso.svg?style=flat)](https://www.npmjs.org/package/tipso)
-[![Bower version](http://img.shields.io/bower/v/tipso.svg?style=flat)](http://bower.io/search/?q=tipso)
-[![Gittip](http://img.shields.io/gratipay/object505.svg?style=flat)](https://gratipay.com/object505/)
+This fork has changed from the original TIPSO in the following ways:
 
->There is also a Wordpress version of this plugin. Get it [here](https://wordpress.org/plugins/tipso/)
+- Template engine support added
+- Corner positions support added
+- Title bar added
+- Size option added (similar to Foundation's syntax)
+- Events send the element for easier updating
+- Show/Hide arrow option added
+- All settings are accessible from data-tipso-
+- The data-tipso attribute itself can be used for settings as well as the content
+- Large tooltips with right/left positions also reposition if they don't fit
 
 ## Getting started
 
@@ -29,7 +34,7 @@ A Lightweight Responsive jQuery Tooltip Plugin
 To use css3 animation effects please include [Animate.css](http://daneden.github.io/animate.css)
 
 	```html
-	<link rel="stylesheet" href="/path/to/animate.css">	
+	<link rel="stylesheet" href="/path/to/animate.css">
 	```
 
 3. Call the plugin
@@ -74,7 +79,7 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 
 	// Destroy tipso tooltip
 	$('.tipso').tipso('destroy');
-	
+
 	// Add a callback before tipso is shown
 	$('.tipso').tipso({
 		onBeforeShow: function(){
@@ -97,7 +102,7 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 	});
 
 	// Load AJAX content to tipso
-	$('.tipso').tipso({	
+	$('.tipso').tipso({
 		useTitle: false,
 		ajaxContentUrl : 'ajax.html'
 	});
@@ -106,16 +111,12 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 	$('.tipso').tipso('update', 'content', 'new content');
 ```
 
-## Demo
-Here is the link to the [demo][demo]
-[demo]: http://tipso.object505.com
-
 ## Bugs
 For bug reports, questions, feature requests, or other suggestions please create an [issue][issue] on GitHub.
-[issue]: https://github.com/object505/tipso/issues/new
+[issue]: https://github.com/auxiliary/tipso/issues/new
 
 
-## Author
+## Original Author
 | ![twitter/BojanPetkovski](http://gravatar.com/avatar/30befed2bed6e1690a6b47cf617f7927?s=105](http://twitter.com/BojanPetkovski "Follow @BojanPetkovski on Twitter") |
 |---|
 | [Bojan Petkovski](http://object505.com) |
