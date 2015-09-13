@@ -45,54 +45,58 @@
 	pointer-events: none;
 }
 .tipso_bubble.top > .tipso_arrow {
- 	border-top-color: #000;
- 	border-right-color: transparent;
+	border-top-color: #000;
+	border-right-color: transparent;
 	border-left-color: transparent;
 	border-bottom-color: transparent;
-  top: 100%;
-  left: 50%;
-  margin-left: -8px;
+	top: 100%;
+	left: 50%;
+	margin-left: -8px;
 }
 .tipso_bubble.bottom > .tipso_arrow {
-  border-bottom-color: #000;
-  border-right-color: transparent;
+	border-bottom-color: #000;
+	border-right-color: transparent;
 	border-left-color: transparent;
 	border-top-color: transparent;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -8px;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -8px;
 }
 .tipso_bubble.left > .tipso_arrow {
-  border-left-color: #000;
+	border-left-color: #000;
 	border-top-color: transparent;
 	border-bottom-color: transparent;
 	border-right-color: transparent;
-  top: 50%;
+	top: 50%;
 	left: 100%;
 	margin-top: -8px;
 }
 .tipso_bubble.right > .tipso_arrow {
-  border-right-color: #000;
+	border-right-color: #000;
 	border-top-color: transparent;
 	border-bottom-color: transparent;
 	border-left-color: transparent;
-  top: 50%;
+	top: 50%;
 	right: 100%;
 	margin-top: -8px;
 }
 
-.tipso_bubble .top_right_corner, .tipso_bubble.top_right_corner {
+.tipso_bubble .top_right_corner, 
+.tipso_bubble.top_right_corner {
 	border-bottom-left-radius: 0;
 }
 
-.tipso_bubble .bottom_right_corner, .tipso_bubble.bottom_right_corner  {
+.tipso_bubble .bottom_right_corner, 
+.tipso_bubble.bottom_right_corner  {
 	border-top-left-radius: 0;
 }
 
-.tipso_bubble .top_left_corner, .tipso_bubble.top_left_corner {
+.tipso_bubble .top_left_corner, 
+.tipso_bubble.top_left_corner {
 	border-bottom-right-radius: 0;
 }
 
-.tipso_bubble .bottom_left_corner, .tipso_bubble.bottom_left_corner  {
+.tipso_bubble .bottom_left_corner, 
+.tipso_bubble.bottom_left_corner  {
 	border-top-right-radius: 0;
 }

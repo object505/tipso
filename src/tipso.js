@@ -1,5 +1,5 @@
 /*!
- * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.5
+ * tipso - A Lightweight Responsive jQuery Tooltip Plugin v1.0.6
  * Copyright (c) 2014-2015 Bojan Petkovski
  * http://tipso.object505.com
  * Licensed under the MIT license
@@ -85,10 +85,6 @@
         {
           this.settings[settings_key] = data_attrs[key];
         }
-      }
-      if (key == "tooltiphover")
-      {
-        console.log(this.settings);
       }
     }
 
