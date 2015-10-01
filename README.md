@@ -62,7 +62,7 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 | content             | null         | The content of the tooltip, can be text, html or whatever you want                                                                 |
 | ajaxContentUrl      | null         | Url for Ajax content                                                                                                               |
 | contentElementId    | null         | Normally used for picking template scripts                                                                                         |
-| useTitle            | true         | To use the default title attribute as content (true, false)                                                                        |
+| useTitle            | false        | To use the default title attribute as content (true, false)                                                                        |
 | templateEngineFunc  | null         | A function that compiles and renders the content                                                                                   |
 | onBeforeShow        | function(){} | Function to be executed before tipso is shown                                                                                      |
 | onShow              | function(){} | Function to be executed after tipso is shown                                                                                       |
