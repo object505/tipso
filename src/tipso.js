@@ -248,7 +248,7 @@
     },
     hide: function() {
       var obj = this,
-        $win = this.win;
+        $win = this.win,
         tipso_bubble = this.tooltip();
 
       window.clearTimeout(obj.timeout);
