@@ -54,6 +54,7 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 | width               | 200          | Width of the tooltip in px or % (for % add the value in quotes ex.'50%')                                                           |
 | maxWidth            | ''           | max-width of the tooltip in px or % (for % add the value in quotes ex.'50%'). For usage you need to set width to '', false or null |
 | delay               | 200          | Delay before showing the tooltip in ms                                                                                             |
+| hideDelay           | 0            | Delay before hiding the tooltip in ms                                                                                              |
 | animationIn         | ''           | CSS3 animation effect to show the tooltip using [Animate.css](http://daneden.github.io/animate.css)                                |
 | animationOut        | ''           | CSS3 animation effect to hide the tooltip using [Animate.css](http://daneden.github.io/animate.css)                                |
 | offsetX             | 0            | Offset value of the tooltip on X axis                                                                                              |

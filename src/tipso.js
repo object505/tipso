@@ -31,6 +31,7 @@
       width             : 200,
       maxWidth          : '',
       delay             : 200,
+      hideDelay         : 0,
       animationIn       : '',
       animationOut      : '',
       offsetX           : 0,
@@ -108,55 +109,44 @@
         $e = this.element,
         $doc = this.doc;
       $e.addClass('tipso_style').removeAttr('title');
-      if (isTouchSupported()) {
-        $e.on('click' + '.' + pluginName, function(e) {
-          obj.mode === 'hide' ? obj.show() : obj.hide();
-          e.stopPropagation();
+
+      if (obj.settings.tooltipHover) {
+        var waitForHover = null,
+            hoverHelper = null;
+        $e.on('mouseover' + '.' + pluginName, function() {
+          clearTimeout(waitForHover);
+          clearTimeout(hoverHelper);
+          hoverHelper = setTimeout(function(){
+            obj.show();
+          }, 150);
         });
-        $doc.on('click', function closeTipso () {
-          if (obj.mode === 'show') {
+        $e.on('mouseout' + '.' + pluginName, function() {
+          clearTimeout(waitForHover);
+          clearTimeout(hoverHelper);
+          waitForHover = setTimeout(function(){
             obj.hide();
-          }
+          }, 200);
+
+          obj.tooltip()
+            .on('mouseover' + '.' + pluginName, function() {
+              obj.mode = 'tooltipHover';
+            })
+            .on('mouseout' + '.' + pluginName, function() {
+              obj.mode = 'show';
+              clearTimeout(waitForHover);
+              waitForHover = setTimeout(function(){
+                obj.hide();
+              }, 200);
+            })
+        ;
         });
       } else {
-        if (obj.settings.tooltipHover) {
-          var waitForHover = null,
-              hoverHelper = null;
-          $e.on('mouseover' + '.' + pluginName, function() {
-            clearTimeout(waitForHover);
-            clearTimeout(hoverHelper);
-            hoverHelper = setTimeout(function(){
-              obj.show();
-            }, 150);
-          });
-          $e.on('mouseout' + '.' + pluginName, function() {
-            clearTimeout(waitForHover);
-            clearTimeout(hoverHelper);
-            waitForHover = setTimeout(function(){
-              obj.hide();
-            }, 200);
-
-            obj.tooltip()
-              .on('mouseover' + '.' + pluginName, function() {
-                obj.mode = 'tooltipHover';
-              })
-              .on('mouseout' + '.' + pluginName, function() {
-                obj.mode = 'show';
-                clearTimeout(waitForHover);
-                waitForHover = setTimeout(function(){
-                  obj.hide();
-                }, 200);
-              })
-          ;
-          });
-        } else {
-          $e.on('mouseover' + '.' + pluginName, function() {
-            obj.show();
-          });
-          $e.on('mouseout' + '.' + pluginName, function() {
-            obj.hide();
-          });
-        }
+        $e.on('mouseover' + '.' + pluginName, function() {
+          obj.show();
+        });
+        $e.on('mouseout' + '.' + pluginName, function() {
+          obj.hide();
+        });
       }
     },
     tooltip: function() {
@@ -212,11 +202,14 @@
         tipso_bubble.find('.tipso_content').html(obj.content());
         tipso_bubble.find('.tipso_title').html(obj.titleContent());
         reposition(obj);
-        $win.resize(function tipsoResizeHandler () {
+
+        $win.on('resize' + '.' + pluginName, function tipsoResizeHandler () {
             obj.settings.position = obj.settings.preferedPosition;
             reposition(obj);
         });
 
+        window.clearTimeout(obj.timeout);
+        obj.timeout = null;
         obj.timeout = window.setTimeout(function() {
           if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
             tipso_bubble.appendTo('body').stop(true, true).fadeIn(obj.settings
@@ -240,7 +233,7 @@
               if ($.isFunction(obj.settings.onShow)) {
                 obj.settings.onShow(this.element, this);
               }
-              $win.off('resize', null, 'tipsoResizeHandler');
+              $win.off('resize' + '.' + pluginName, null, 'tipsoResizeHandler');
             });
           }
         }, obj.settings.delay);
@@ -253,42 +246,41 @@
 
       window.clearTimeout(obj.timeout);
       obj.timeout = null;
-      if (obj.mode !== 'tooltipHover') {
-        if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
-          tipso_bubble.stop(true, true).fadeOut(obj.settings.speed,
-          function() {
-            $(this).remove();
-            if ($.isFunction(obj.settings.onHide) && obj.mode === 'show') {
-              obj.settings.onHide(this.element, this);
-            }
-            obj.mode = 'hide';
-            $win.off('resize', null, 'tipsoResizeHandler');
-          });
-        } else {
-          tipso_bubble.stop(true, true)
-          .removeClass('animated ' + obj.settings.animationIn)
-          .addClass('noAnimation').removeClass('noAnimation')
-          .addClass('animated ' + obj.settings.animationOut)
-          .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-            $(this).removeClass('animated ' + obj.settings.animationOut).remove();
-            if ($.isFunction(obj.settings.onHide) && obj.mode === 'show') {
-              obj.settings.onHide(this.element, this);
-            }
-            obj.mode = 'hide';
-            $win.off('resize', null, 'tipsoResizeHandler');
-          });
+      obj.timeout = window.setTimeout(function() {
+        if (obj.mode !== 'tooltipHover') {
+          if (obj.ieFade || obj.settings.animationIn === '' || obj.settings.animationOut === ''){
+            tipso_bubble.stop(true, true).fadeOut(obj.settings.speed,
+            function() {
+              $(this).remove();
+              if ($.isFunction(obj.settings.onHide) && obj.mode === 'show') {
+                obj.settings.onHide(this.element, this);
+              }
+              obj.mode = 'hide';
+              $win.off('resize' + '.' + pluginName, null, 'tipsoResizeHandler');
+            });
+          } else {
+            tipso_bubble.stop(true, true)
+            .removeClass('animated ' + obj.settings.animationIn)
+            .addClass('noAnimation').removeClass('noAnimation')
+            .addClass('animated ' + obj.settings.animationOut)
+            .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+              $(this).removeClass('animated ' + obj.settings.animationOut).remove();
+              if ($.isFunction(obj.settings.onHide) && obj.mode === 'show') {
+                obj.settings.onHide(this.element, this);
+              }
+              obj.mode = 'hide';
+              $win.off('resize' + '.' + pluginName, null, 'tipsoResizeHandler');
+            });
+          }
         }
-      }
+      }, obj.settings.hideDelay);
     },
     destroy: function() {
       var $e = this.element,
         $win = this.win,
         $doc = this.doc;
       $e.off('.' + pluginName);
-      $win.off('resize', null, 'tipsoResizeHandler');
-      if (isTouchSupported()) {
-        $doc.off('click', null, 'closeTipso' );
-      }
+      $win.off('resize' + '.' + pluginName, null, 'tipsoResizeHandler');
       $e.removeData(pluginName);
       $e.removeClass('tipso_style').attr('title', this._title);
     },
@@ -357,16 +349,6 @@
       }
     }
   });
-
-  function isTouchSupported() {
-    var msTouchEnabled = window.navigator.msMaxTouchPoints;
-    var generalTouchEnabled = "ontouchstart" in document.createElement(
-      "div");
-    if (msTouchEnabled || generalTouchEnabled) {
-      return true;
-    }
-    return false;
-  }
 
   function realHeight(obj) {
     var clone = obj.clone();

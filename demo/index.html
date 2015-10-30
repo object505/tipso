@@ -14,7 +14,7 @@
 	<script type="text/template" id="template_sample">
 		This is a test <%= name %>.
 	</script>
-	<script src="../src/tipso.js"></script>
+	<script src="../src/tipso.min.js"></script>
 
 	<!--[if lt IE 9]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -160,6 +160,7 @@
 			});
 			// Calback Tipso
 			jQuery('.callback-tipso').tipso({
+				useTitle: true,
 				onShow : function(){
 			    	alert('Tipso Showed');
 			  	},
@@ -284,6 +285,7 @@
 	width             : 200,
 	maxWidth          : '',
 	delay             : 200,
+	hideDelay         : 0,
 	animationIn       : '',
 	animationOut      : '',
 	offsetX           : 0,
