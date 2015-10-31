@@ -15,7 +15,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
+      "url": "http://object505.mit-license.org/"
     }
   ],
   "demos": [
@@ -30,5 +30,13 @@
     "url": "https://github.com/object505/tipso.git"
   },
   "homepage": "https://github.com/object505/tipso",
-  "license": "MIT"  
+  "license": "MIT",
+  "autoupdate": {
+    "source": "git",
+    "target": "git://github.com/object505/tipso.git",
+    "basePath": "src/",
+    "files": [
+      "**/*"
+    ]
+  }
 }
