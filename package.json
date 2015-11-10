@@ -10,12 +10,12 @@
     "mobile",
     "lightweight"
   ],
-  "version": "1.0.0",
+  "version": "1.0.7",
   "author": "Bojan Petkovski (http://object505.com/)",
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
+      "url": "http://object505.mit-license.org/"
     }
   ],
   "demos": [
@@ -24,14 +24,19 @@
   "bugs": {
     "url": "https://github.com/object505/tipso/issues/new"
   },
-  "main": [
-    "src/tipso.min.js",
-    "src/tipso.css"
-  ],
+  "main": "src/tipso.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/object505/tipso.git"
   },
   "homepage": "https://github.com/object505/tipso",
-  "license": "MIT"  
+  "license": "MIT",
+  "autoupdate": {
+    "source": "git",
+    "target": "git://github.com/object505/tipso.git",
+    "basePath": "src/",
+    "files": [
+      "**/*"
+    ]
+  }
 }

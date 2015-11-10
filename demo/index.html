@@ -6,9 +6,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,600italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="animate.css">
 	<link rel="stylesheet" href="../src/tipso.css">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../src/tipso.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" charset="utf-8"></script>
+	<script type="text/template" id="template_sample">
+		This is a test <%= name %>.
+	</script>
+	<script src="../src/tipso.min.js"></script>
 
 	<!--[if lt IE 9]>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -20,6 +26,7 @@
 			jQuery('.right').tipso({
 				position: 'right',
 				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
 				useTitle: false,
 			});
 			jQuery('.left').tipso({
@@ -36,13 +43,64 @@
 				position: 'top',
 				background: '#F62459',
 				useTitle: false,
+				width: '',
+				maxWidth: 300
 			});
+			jQuery('.hover-tipso-tooltip').tipso({
+				position: 'top',
+				background: '#000',
+				useTitle: false,
+				width: false,
+				maxWidth: 300,
+				tooltipHover: true,
+				content: function(){
+					return 'You can <a href="javascript:;">CLICK ME</a> now!';
+				}
+			});
+
+			jQuery('.top-right').tipso({
+				position: 'top-right',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
+			jQuery('.top-left').tipso({
+				position: 'top-left',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
+			jQuery('.bottom-right').tipso({
+				position: 'bottom-right',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
+			jQuery('.bottom-left').tipso({
+				position: 'bottom-left',
+				background: 'rgba(0,0,0,0.8)',
+				titleBackground: 'tomato',
+				titleContent: 'Some title',
+				useTitle: false,
+				tooltipHover: true
+			});
+
 			// Use Title For Tipso Content
-			jQuery('.title-tipso').tipso();
+			jQuery('.title-tipso').tipso({useTitle: true});
 			// Tipso for Image
 			jQuery('.img-tipso').tipso({
 				useTitle: false,
-				background: 'rgba(0,0,0,0.8)'
+				background: 'rgba(0,0,0,0.8)',
+				position: 'top-left'
 			});
 			// Show - Hide Tipso on Click
 			jQuery('.show-hide').tipso({
@@ -58,6 +116,31 @@
 					jQuery('.show-hide').tipso('show');
 				}
 				e.preventDefault();
+			});
+			// Before show
+			jQuery('.beforeShow').tipso({
+				background: 'tomato',
+				useTitle: false,
+				onBeforeShow : function(element, tips){
+					element.tipso('update', 'content', 'the title is a random number');
+					element.tipso('update', 'titleContent', Math.random());
+				}
+			});
+			jQuery('.beforeShow-tipso').on('click', function(e){
+				if(jQuery(this).hasClass('clicked')){
+					jQuery(this).removeClass('clicked');
+					jQuery('.beforeShow').tipso('hide');
+				} else {
+					jQuery(this).addClass('clicked');
+					jQuery('.beforeShow').tipso('show');
+				}
+				e.preventDefault();
+			});
+			//Ajax
+			jQuery('.ajax').tipso({
+				background: 'tomato',
+				useTitle: false,
+				ajaxContentUrl : 'ajax.html'
 			});
 			// Destroy Tipso
 			jQuery('.destroy-tipso').on('click', function(e){
@@ -77,6 +160,7 @@
 			});
 			// Calback Tipso
 			jQuery('.callback-tipso').tipso({
+				useTitle: true,
 				onShow : function(){
 			    	alert('Tipso Showed');
 			  	},
@@ -84,12 +168,50 @@
 					alert('Tipso Hidden');
 				}
 			});
-			jQuery('.page-load').tipso({
-				position: 'left',
-				background: 'rgb(236,236,236)',
-				color: '#663399',
-				useTitle: false
 
+			jQuery('.template-content').tipso({
+				position: 'top',
+				background: '#55b555',
+				color: '#eee',
+				useTitle: false,
+				size: 'small',
+				contentElementId: 'template_sample',
+				templateEngineFunc: function(content){
+					var compiled = _.template(content);
+					var names = ['moa', 'sara', 'james', 'hugo', 'mehr'];
+					return compiled({name: _.sample(names)});
+				},
+				content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores velit, animi necessitatibus? Odio repudiandae vero',
+				onBeforeShow: function(ele, tipso) {
+					ele.tipso('update', 'content', '');
+				}
+			});
+
+			jQuery('.tiny').tipso({ size: 'tiny' });
+			jQuery('.small').tipso({ size: 'small' });
+			jQuery('.default').tipso({ size: 'default' });
+			jQuery('.large').tipso({ size: 'large' });
+
+			jQuery('.page-load').tipso({
+				position: 'bottom',
+				background: '#55b555',
+				color: '#eee',
+				useTitle: false,
+				content: 'This one loads on page load',
+			});
+			// Animate Tipso
+			jQuery('.animate').tipso({
+				animationIn: 'bounceIn',
+				animationOut: 'bounceOut',
+				useTitle: false,
+			});
+			jQuery('.animationIn').on('change', function(e){
+				var $this = jQuery(this);
+				jQuery('.animate').tipso('update', 'animationIn', $this.val());
+			});
+			jQuery('.animationOut').on('change', function(e){
+				var $this = jQuery(this);
+				jQuery('.animate').tipso('update', 'animationOut', $this.val());
 			});
 
 		});
@@ -106,14 +228,29 @@
 			<div class="row">
 				<div class="c12"><h1>Tipso <span>A Lightweight Responsive jQuery Tooltip Plugin</span></h1></div>
 			</div>
+			<div class="row">
+				<div class="c12">
+					<ul class="social">
+						<li>SHARE ON</li>
+						<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftipso.object505.com%2F&t=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin" target="_blank" title="Share on Facebook"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+						<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Ftipso.object505.com%2F&text=tipso%20-%20%20A%20Lightweight%20Responsive%20jQuery%20Tooltip%20Plugin:%20http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Tweet"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+						<li><a href="https://plus.google.com/share?url=http%3A%2F%2Ftipso.object505.com%2F" target="_blank" title="Share on Google+"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</header>
 	<a href="https://github.com/object505/tipso"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 	<div id="main">
 		<div class="grid w960">
+			<div class="row wordpress-info">
+				<div class="c12">
+					<p>There is also a Wordpress version of this plugin. GET IT <a href="https://wordpress.org/plugins/tipso/" target="_blank">HERE</a></p>
+				</div>
+			</div>			
 			<div class="row">
 				<div class="c12">
-					<h3>Getting started</h3>				
+					<h3>Getting started</h3>
 
 <p>1. Include jQuery</p>
 <pre><code>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
@@ -123,6 +260,9 @@
 <p>2. Include plugin's code</p>
 <pre><code>&lt;link rel="stylesheet" href="/path/to/tipso.css"&gt;
 &lt;script src="/path/to/tipso.js"&gt;&lt;/script&gt;
+</code></pre>
+<p>To use css3 animation effects please include <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a></p>
+<pre><code>&lt;link rel="stylesheet" href="/path/to/animate.css"&gt;
 </code></pre>
 
 <p>3. Call the plugin </p>
@@ -134,18 +274,31 @@
 				<div class="c12">
 					<h3>Defaults</h3>
 <pre><code>jQuery(element).tipso({
-    speed       : 400,
-    background  : '#55b555',
-    color       : '#ffffff',
-    position    : 'top',
-    width       : 200,
-    delay       : 200,
-    offsetX     : 0,
-    offsetY     : 0,
-    content     : null,
-    useTitle    : true,
-    onShow      : null,
-    onHide      : null
+	speed             : 400,        
+	background        : '#55b555',
+	titleBackground   : '#333333',
+	color             : '#ffffff',
+	titleColor        : '#ffffff',
+	titleContent      : '',       
+	showArrow         : true
+	position          : 'top',
+	width             : 200,
+	maxWidth          : '',
+	delay             : 200,
+	hideDelay         : 0,
+	animationIn       : '',
+	animationOut      : '',
+	offsetX           : 0,
+	offsetY           : 0,
+	tooltipHover      : false,
+	content           : null,
+	ajaxContentUrl    : null,
+	contentElementId  : null,
+	useTitle          : false,
+	templateEngineFunc: null,
+	onBeforeShow      : null,
+	onShow            : null,
+	onHide            : null
 });</code></pre>
 
 				</div>
@@ -160,9 +313,90 @@
 			<div class="row demo-section">
 				<div class="c12">
 					<h4>Position top, bottom, left and right</h4>
-					<p>Lorem ipsum dolor sit <span class="left" title="tipso" data-tipso="This is a left TIPSO!">left</span>, consectetur adipisicing elit. Minima <span class="top" title="tipso" data-tipso="This is a top TIPSO!">top</span> nostrum, quia inventore ullam consequuntur velit <span class="right" title="tipso" data-tipso="This is a right TIPSO!">right</span> fuga officiis non repellendus ea qui nihil delectus, <span class="bottom" title="tipso" data-tipso="This is a bottom TIPSO!">bottom</span> eligendi accusamus ratione odio.</p>
+					<p>Lorem ipsum dolor sit <span class="left" title="tipso" data-tipso="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta reprehenderit itaque magni, minus numquam! Sunt asperiores eligendi esse rerum harum cum voluptate reprehenderit, maiores voluptatum doloribus debitis, expedita placeat earum.">left</span>
+						, consectetur adipisicing elit. Minima <span class="top" title="tipso" data-tipso="This is a top TIPSO!">top</span> nostrum, quia inventore ullam consequuntur velit <span class="right" title="tipso" data-tipso-title="This is a title" data-tipso="This is a right TIPSO! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus dolorum eum aliquam obcaecati doloremque odio at, laborum, non nobis eveniet dolor explicabo et ut facilis nam soluta libero veritatis! Id.">right</span> fuga officiis non repellendus ea qui nihil delectus, <span class="bottom" title="tipso" data-tipso="This is a bottom TIPSO!">bottom</span> eligendi accusamus ratione odio.</p>
 				</div>
+			</div>
 
+			<div class="row demo-section">
+				<div class="c12">
+					<h4>Corner positions</h4>
+					<p>Lorem ipsum dolor sit <span class="top-right" title="tipso" data-tipso="This is a top-right TIPSO!">top-right</span></p>
+					<p>Lorem ipsum dolor sit <span class="top-left" title="tipso" data-tipso="This is a top-left TIPSO!">top-left</span></p>
+					<p>Lorem ipsum dolor sit <span class="bottom-right" title="tipso" data-tipso="This is a bottom-right TIPSO!">bottom-right</span></p>
+					<p>Lorem ipsum dolor sit <span class="bottom-left" title="tipso" data-tipso="This is a bottom-left TIPSO!">bottom-left</span></p>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Title bar</h4>
+					<p>Some <span class="top" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">content</span></p>
+					<p>Title bar <span class="bottom" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">automatic arrow color</span></p>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code type="javascript">
+jQuery('.top').tipso({
+  titleContent: 'Hello'
+});
+//or use data-tipso-title
+</code>
+					</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Size option</h4>
+					<p>
+						Tiny <span class="tiny" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>,
+						Small <span class="small" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>,
+						Default <span class="default" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>,
+						Large <span class="large" data-tipso-title="Hello" data-tipso="This is a TIPSO with a title!">tooltip</span>
+					</p>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code type="javascript">
+jQuery('.top').tipso({
+  size: 'tiny'
+});
+</code>
+					</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Template engine support</h4>
+					<p>
+						The content of this <span class="template-content">tooltip</span> comes from a template engine and gets changed randomly every time.
+						This example is using Underscore.
+					</p>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code type="javascript">
+jQuery('.template-content').tipso({
+  position: 'top',
+  background: '#55b555',
+  color: '#eee',
+  useTitle: false,
+  size: 'small',
+  contentElementId: 'template_sample',
+  templateEngineFunc: function(content){
+  	var compiled = _.template(content);
+  	var names = ['moa', 'sara', 'james', 'hugo', 'mehr'];
+  	return compiled({name: _.sample(names)});
+  },
+  onBeforeShow: function(ele, tipso) {
+  	ele.tipso('update', 'content', '');
+  }
+});
+</code>
+					</pre>
+				</div>
 			</div>
 
 			<div class="row demo-section">
@@ -175,6 +409,261 @@
 <code>
 jQuery(window).load(function(){
   jQuery('.page-load').tipso('show');
+});
+</code>
+</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Tipso CSS3 Animation</h4>
+					<p>Tipso tooltip with CSS3 <span class="animate" data-tipso="CSS3 Animated TIPSO!">animation</span> effects using <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a></p>
+					<div class="row">
+						<div class="c6">
+							<p>Animation In</p>
+							<select class="animationIn">
+						        <optgroup label="Attention Seekers">
+						          <option value="bounce">bounce</option>
+						          <option value="flash">flash</option>
+						          <option value="pulse">pulse</option>
+						          <option value="rubberBand">rubberBand</option>
+						          <option value="shake">shake</option>
+						          <option value="swing">swing</option>
+						          <option value="tada">tada</option>
+						          <option value="wobble">wobble</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Entrances">
+						          <option value="bounceIn" selected>bounceIn</option>
+						          <option value="bounceInDown">bounceInDown</option>
+						          <option value="bounceInLeft">bounceInLeft</option>
+						          <option value="bounceInRight">bounceInRight</option>
+						          <option value="bounceInUp">bounceInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Exits">
+						          <option value="bounceOut">bounceOut</option>
+						          <option value="bounceOutDown">bounceOutDown</option>
+						          <option value="bounceOutLeft">bounceOutLeft</option>
+						          <option value="bounceOutRight">bounceOutRight</option>
+						          <option value="bounceOutUp">bounceOutUp</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Entrances">
+						          <option value="fadeIn">fadeIn</option>
+						          <option value="fadeInDown">fadeInDown</option>
+						          <option value="fadeInDownBig">fadeInDownBig</option>
+						          <option value="fadeInLeft">fadeInLeft</option>
+						          <option value="fadeInLeftBig">fadeInLeftBig</option>
+						          <option value="fadeInRight">fadeInRight</option>
+						          <option value="fadeInRightBig">fadeInRightBig</option>
+						          <option value="fadeInUp">fadeInUp</option>
+						          <option value="fadeInUpBig">fadeInUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Exits">
+						          <option value="fadeOut">fadeOut</option>
+						          <option value="fadeOutDown">fadeOutDown</option>
+						          <option value="fadeOutDownBig">fadeOutDownBig</option>
+						          <option value="fadeOutLeft">fadeOutLeft</option>
+						          <option value="fadeOutLeftBig">fadeOutLeftBig</option>
+						          <option value="fadeOutRight">fadeOutRight</option>
+						          <option value="fadeOutRightBig">fadeOutRightBig</option>
+						          <option value="fadeOutUp">fadeOutUp</option>
+						          <option value="fadeOutUpBig">fadeOutUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Flippers">
+						          <option value="flip">flip</option>
+						          <option value="flipInX">flipInX</option>
+						          <option value="flipInY">flipInY</option>
+						          <option value="flipOutX">flipOutX</option>
+						          <option value="flipOutY">flipOutY</option>
+						        </optgroup>
+
+						        <optgroup label="Lightspeed">
+						          <option value="lightSpeedIn">lightSpeedIn</option>
+						          <option value="lightSpeedOut">lightSpeedOut</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Entrances">
+						          <option value="rotateIn">rotateIn</option>
+						          <option value="rotateInDownLeft">rotateInDownLeft</option>
+						          <option value="rotateInDownRight">rotateInDownRight</option>
+						          <option value="rotateInUpLeft">rotateInUpLeft</option>
+						          <option value="rotateInUpRight">rotateInUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Exits">
+						          <option value="rotateOut">rotateOut</option>
+						          <option value="rotateOutDownLeft">rotateOutDownLeft</option>
+						          <option value="rotateOutDownRight">rotateOutDownRight</option>
+						          <option value="rotateOutUpLeft">rotateOutUpLeft</option>
+						          <option value="rotateOutUpRight">rotateOutUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Specials">
+						          <option value="hinge">hinge</option>
+						          <option value="rollIn">rollIn</option>
+						          <option value="rollOut">rollOut</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Entrances">
+						          <option value="zoomIn">zoomIn</option>
+						          <option value="zoomInDown">zoomInDown</option>
+						          <option value="zoomInLeft">zoomInLeft</option>
+						          <option value="zoomInRight">zoomInRight</option>
+						          <option value="zoomInUp">zoomInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Exits">
+						          <option value="zoomOut">zoomOut</option>
+						          <option value="zoomOutDown">zoomOutDown</option>
+						          <option value="zoomOutLeft">zoomOutLeft</option>
+						          <option value="zoomOutRight">zoomOutRight</option>
+						          <option value="zoomOutUp">zoomOutUp</option>
+						        </optgroup>
+						      </select>
+						</div>
+						<div class="c6">
+							<p>Animation Out</p>
+							<select class="animationOut">
+						        <optgroup label="Attention Seekers">
+						          <option value="bounce">bounce</option>
+						          <option value="flash">flash</option>
+						          <option value="pulse">pulse</option>
+						          <option value="rubberBand">rubberBand</option>
+						          <option value="shake">shake</option>
+						          <option value="swing">swing</option>
+						          <option value="tada">tada</option>
+						          <option value="wobble">wobble</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Entrances">
+						          <option value="bounceIn">bounceIn</option>
+						          <option value="bounceInDown">bounceInDown</option>
+						          <option value="bounceInLeft">bounceInLeft</option>
+						          <option value="bounceInRight">bounceInRight</option>
+						          <option value="bounceInUp">bounceInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Bouncing Exits">
+						          <option value="bounceOut" selected>bounceOut</option>
+						          <option value="bounceOutDown">bounceOutDown</option>
+						          <option value="bounceOutLeft">bounceOutLeft</option>
+						          <option value="bounceOutRight">bounceOutRight</option>
+						          <option value="bounceOutUp">bounceOutUp</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Entrances">
+						          <option value="fadeIn">fadeIn</option>
+						          <option value="fadeInDown">fadeInDown</option>
+						          <option value="fadeInDownBig">fadeInDownBig</option>
+						          <option value="fadeInLeft">fadeInLeft</option>
+						          <option value="fadeInLeftBig">fadeInLeftBig</option>
+						          <option value="fadeInRight">fadeInRight</option>
+						          <option value="fadeInRightBig">fadeInRightBig</option>
+						          <option value="fadeInUp">fadeInUp</option>
+						          <option value="fadeInUpBig">fadeInUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Fading Exits">
+						          <option value="fadeOut">fadeOut</option>
+						          <option value="fadeOutDown">fadeOutDown</option>
+						          <option value="fadeOutDownBig">fadeOutDownBig</option>
+						          <option value="fadeOutLeft">fadeOutLeft</option>
+						          <option value="fadeOutLeftBig">fadeOutLeftBig</option>
+						          <option value="fadeOutRight">fadeOutRight</option>
+						          <option value="fadeOutRightBig">fadeOutRightBig</option>
+						          <option value="fadeOutUp">fadeOutUp</option>
+						          <option value="fadeOutUpBig">fadeOutUpBig</option>
+						        </optgroup>
+
+						        <optgroup label="Flippers">
+						          <option value="flip">flip</option>
+						          <option value="flipInX">flipInX</option>
+						          <option value="flipInY">flipInY</option>
+						          <option value="flipOutX">flipOutX</option>
+						          <option value="flipOutY">flipOutY</option>
+						        </optgroup>
+
+						        <optgroup label="Lightspeed">
+						          <option value="lightSpeedIn">lightSpeedIn</option>
+						          <option value="lightSpeedOut">lightSpeedOut</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Entrances">
+						          <option value="rotateIn">rotateIn</option>
+						          <option value="rotateInDownLeft">rotateInDownLeft</option>
+						          <option value="rotateInDownRight">rotateInDownRight</option>
+						          <option value="rotateInUpLeft">rotateInUpLeft</option>
+						          <option value="rotateInUpRight">rotateInUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Rotating Exits">
+						          <option value="rotateOut">rotateOut</option>
+						          <option value="rotateOutDownLeft">rotateOutDownLeft</option>
+						          <option value="rotateOutDownRight">rotateOutDownRight</option>
+						          <option value="rotateOutUpLeft">rotateOutUpLeft</option>
+						          <option value="rotateOutUpRight">rotateOutUpRight</option>
+						        </optgroup>
+
+						        <optgroup label="Specials">
+						          <option value="hinge">hinge</option>
+						          <option value="rollIn">rollIn</option>
+						          <option value="rollOut">rollOut</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Entrances">
+						          <option value="zoomIn">zoomIn</option>
+						          <option value="zoomInDown">zoomInDown</option>
+						          <option value="zoomInLeft">zoomInLeft</option>
+						          <option value="zoomInRight">zoomInRight</option>
+						          <option value="zoomInUp">zoomInUp</option>
+						        </optgroup>
+
+						        <optgroup label="Zoom Exits">
+						          <option value="zoomOut">zoomOut</option>
+						          <option value="zoomOutDown">zoomOutDown</option>
+						          <option value="zoomOutLeft">zoomOutLeft</option>
+						          <option value="zoomOutRight">zoomOutRight</option>
+						          <option value="zoomOutUp">zoomOutUp</option>
+						        </optgroup>
+						      </select>
+						</div>
+					</div>
+				</div>
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+<strong>If you use animate.css</strong>
+jQuery(.tipso).tipso({
+  animationIn: 'bounceIn',
+  animationOut: 'bounceOut'
+});
+
+<strong>If you don't use animate.css</strong>
+jQuery(.tipso).tipso({
+  animationIn: '',
+  animationOut: ''
+});
+</code>
+</pre>
+				</div>
+			</div>
+
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Interact with tipso tooltip</h4>
+					<p>Some tooltip <span class="hover-tipso-tooltip" data-tipso="This is a manual TIPSO!">content</span> you can interact with</p>
+				</div>
+
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+jQuery('.hover-tipso-tooltip').tipso({
+    tooltipHover: true
 });
 </code>
 </pre>
@@ -207,6 +696,55 @@ jQuery('.show-hide-tipso').on('click', function(e){
 				</div>
 			</div>
 
+			<div class="row demo-section">
+				<div class="c6">
+					<h4>Before show</h4>
+					<p>Some <span class="beforeShow" data-tipso="Some content">content</span></p>
+					<a href="#" class="beforeShow-tipso">Click me to show/hide tipso</a>
+				</div>
+
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+jQuery('.beforeShow').tipso({
+	background: 'tomato',
+	useTitle: false,
+	onBeforeShow : function(){
+		console.log('This is beforeShow');
+	}
+});
+jQuery('.beforeShow-tipso').on('click', function(e){
+	if(jQuery(this).hasClass('clicked')){
+		jQuery(this).removeClass('clicked');
+		jQuery('.beforeShow').tipso('hide');
+	} else {
+		jQuery(this).addClass('clicked');
+		jQuery('.beforeShow').tipso('show');
+	}
+	e.preventDefault();
+});
+</code>
+					</pre>
+				</div>
+			</div>
+<div class="row demo-section">
+				<div class="c6">
+					<h4>Ajax content</h4>
+					<p>Some <span class="ajax" data-tipso="This is TIPSO!">content</span></p>
+				</div>
+
+				<div class="c6">
+					<pre><span>Code Example</span>
+<code>
+jQuery('.ajax').tipso({
+	background: 'tomato',
+	useTitle: false,
+	ajaxContentUrl : 'ajax.html'
+});
+</code>
+</pre>
+				</div>
+			</div>
 
 
 			<div class="row demo-section">
@@ -282,7 +820,9 @@ jQuery('.update-tipso-input').on('click', function(e){
 				<div class="c6">
 					<pre><span>Code Example</span>
 <code>
-jQuery('.title-tipso').tipso();
+jQuery('.title-tipso').tipso({
+  useTitle: true
+});
 </code>
 </pre>
 				</div>
@@ -329,11 +869,11 @@ jQuery('.callback-tipso').tipso({
 </pre>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="c12">
 					<p class="author">Made by <a href="http://object505.com">Bojan Petkovski</a></p>
-				</div>				
+				</div>
 			</div>
 
 		</div>
