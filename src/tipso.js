@@ -40,6 +40,7 @@
       tooltipHover      : false,
       content           : null,
       ajaxContentUrl    : null,
+	  ajaxContentBuffer : 0,
       contentElementId  : null,         //Normally used for picking template scripts
       useTitle          : false,        //Use the title tag as tooptip or not
       templateEngineFunc: null,         //A function that compiles and renders the content
@@ -148,6 +149,10 @@
           obj.hide();
         });
       }
+	  if(obj.settings.ajaxContentUrl)
+	  {
+		obj.ajaxContent = null;
+	  }
     },
     tooltip: function() {
       if (!this.tipso_bubble) {
@@ -305,11 +310,28 @@
         title = this._title;
       if (obj.settings.ajaxContentUrl)
       {
-        content = $.ajax({
-          type: "GET",
-          url: obj.settings.ajaxContentUrl,
-          async: false
-        }).responseText;
+		if(obj._ajaxContent)
+		{
+			content = obj._ajaxContent;
+		}
+		else 
+		{
+			obj._ajaxContent = content = $.ajax({
+			  type: "GET",
+			  url: obj.settings.ajaxContentUrl,
+			  async: false
+			}).responseText;
+			if(obj.settings.ajaxContentBuffer > 0)
+			{
+				setTimeout(function(){ 
+					obj._ajaxContent = null;
+				}, obj.settings.ajaxContentBuffer);
+			}
+			else 
+			{
+				obj._ajaxContent = null;
+			}
+		}
       }
       else if (obj.settings.contentElementId)
       {

@@ -62,6 +62,7 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 | tooltipHover        | false        | Abillity to interact with the tooltip content                                                                                      |
 | content             | null         | The content of the tooltip, can be text, html or whatever you want                                                                 |
 | ajaxContentUrl      | null         | Url for Ajax content                                                                                                               |
+| ajaxContentBuffer   | 0            | Buffer timer for Ajax content                                                                                                      |
 | contentElementId    | null         | Normally used for picking template scripts                                                                                         |
 | useTitle            | false        | To use the default title attribute as content (true, false)                                                                        |
 | templateEngineFunc  | null         | A function that compiles and renders the content                                                                                   |
