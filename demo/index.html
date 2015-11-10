@@ -140,7 +140,8 @@
 			jQuery('.ajax').tipso({
 				background: 'tomato',
 				useTitle: false,
-				ajaxContentUrl : 'ajax.html'
+				ajaxContentUrl : 'ajax.html',
+				ajaxContentBuffer : 5000
 			});
 			// Destroy Tipso
 			jQuery('.destroy-tipso').on('click', function(e){
@@ -293,6 +294,7 @@
 	tooltipHover      : false,
 	content           : null,
 	ajaxContentUrl    : null,
+	ajaxContentBuffer : 0,
 	contentElementId  : null,
 	useTitle          : false,
 	templateEngineFunc: null,
@@ -739,7 +741,8 @@ jQuery('.beforeShow-tipso').on('click', function(e){
 jQuery('.ajax').tipso({
 	background: 'tomato',
 	useTitle: false,
-	ajaxContentUrl : 'ajax.html'
+	ajaxContentUrl : 'ajax.html',
+	ajaxContentBuffer : 5000
 });
 </code>
 </pre>
