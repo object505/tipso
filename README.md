@@ -83,26 +83,31 @@ To use css3 animation effects please include [Animate.css](http://daneden.github
 	// Hide the tipso tooltip
 	$('.tipso').tipso('hide');
 
+	// Hide/Close the tipso tooltip from inside the tooltip and/or without hideDelay timeout
+	$('.tipso').tipso('close');
+	// or as alternative
+	$('.tipso').tipso('hide', true);
+
 	// Destroy tipso tooltip
 	$('.tipso').tipso('destroy');
 	
 	// Add a callback before tipso is shown
 	$('.tipso').tipso({
-		onBeforeShow: function(){
+		onBeforeShow: function ($element, element) {
 			// Your code
 		}
 	});
 
 	// Add a callback when tipso is shown
 	$('.tipso').tipso({
-		onShow: function(){
+		onShow: function ($element, element) {
 			// Your code
 		}
 	});
 
 	// Add a callback when tipso is hidden
 	$('.tipso').tipso({
-		onHide: function(){
+		onHide: function ($element, element) {
 			// Your code
 		}
 	});

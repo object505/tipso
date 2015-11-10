@@ -1,6 +1,6 @@
 {
   "name": "tipso",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Lightweight Responsive jQuery Tooltip Plugin",
   "main": ["src/tipso.min.js", "src/tipso.css"],
   "keywords": [
