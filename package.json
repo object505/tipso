@@ -18,6 +18,9 @@
       "url": "http://object505.mit-license.org/"
     }
   ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
   "demos": [
     "http://tipso.object505.com/"
   ],
